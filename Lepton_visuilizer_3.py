@@ -75,7 +75,7 @@ class sockets():
         save_index = 0
 
         while True:
-
+            print "\n"
             image_str = conn.recv(9840)
 
 
@@ -84,64 +84,98 @@ class sockets():
             # CV2
             nparr = np.fromstring(image_str, np.uint8)
 
-            
+            ## each pixel is seperated by 30s, find all of them
+            try:
+                thirty = np.where(nparr == 30)[0]
+                print "thirty", len(thirty)
+                print nparr[0:10]
+                ## whenever there is a disruption in the one off sequence, assume new row
+                ## accomplish this by simpe subtraction 
+                thirty_repeat = thirty[1::] - thirty[0:-1]
+                ## a difference of more than 2 confirms this
+                not_thirty_repeat =  np.where(thirty_repeat != 2)[0]
+                not_thirty_diff = not_thirty_repeat[1::] - not_thirty_repeat[0:-1]
 
-            #f_handle = file("test_array_7.txt", 'a')
-            #np.savetxt(f_handle, np.transpose( nparr), \
-            #newline='\n', delimiter=',')
-            #f_handle.close()
+            except:
+                #print "no thirties"
+                print "data array: ", nparr[0:10]
+                continue
 
-            #nparr = np.reshape(nparr, (32,32))
-            #img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_GRAYSCALE) ##COLOR) #  in OpenCV 3.
-
-            ## seperate current data stream
-            img_ints = nparr[1::2]
-
-            ## begin appending to img array
-            img_array = np.append( img_array, img_ints)
-
-            max_index = 0
-
-            img_array = np.array( (img_array), dtype=np.uint8)
+            ## the first one begins the sequence of 164 len arrays
+            ## as it is every other
+            img_array = np.array( (nparr), dtype=np.uint8)
             #print "new ints: ", img_ints[0:5]
 
-            for k in range(59):
+            ## first stream garbage
+            if save_index < 3:
+                save_index += 1
+                continue
+            else:
+                pass
+            print "starting img reassembly"
+            img_start = not_thirty_repeat[0]*2 + 4
+
+            img_start = not_thirty_repeat[0]*2 + 4
+            if thirty[0] > 1:
+                img_start += thirty[0]-1
+            else:
+                pass
+
+            
+            for i in range(len(not_thirty_repeat)-1):
+
                 try:
+                   
+                    if not_thirty_diff[i] >= 80 and not_thirty_diff[i] < 82:
+                        if i > 0:
+                            guess = img_start + 164
+                    else:
+                        guess = img_start
 
-                    index = np.where(img_array == k)
-                    index = index[0][0] + 2
-                    
-                    index_end = np.where(img_array == k+1)
-                    index_end = index_end[0][0]
-
-                    #print "index length: ", index_end - index
-                    fract_update = index_end - index
-                    if fract_update > 80:
+                    elif not_thirty_diff[i] == 1:
                         continue
+                    else:
+                        guess = img_start + (not_thirty_diff[i]+2 ) * 2
+                        print "################################# short: ", not_thirty_diff[i]
 
-                    img[k,:] = np.array( ( img_array[index:index+80]) )
 
-                    #print "updated image", k
-                    if index > max_index:
-                        max_index = index + 82
+                        print "guess   : ", img_array[ guess-5: guess +5 ], img_array[guess]  ## expt 26*2  56
+                        data_half = img_array[guess::2]
+                        img_row = data_half[1:81]
+                        img_row = np.array( (img_row), dtype=np.uint8)
+                        row_index = img_array[guess]
+                        if row_index > 60:
+                            pass
+                    else:
+                        img[row_index,:] = img_row
 
+                        img_start = guess
+
+                   print "row updated"
+                   
                 except:
+                    print "######################## pass, ", i
                     pass
+            
 
-            img = np.array( (img), dtype =np.uint8)
-
+            
             cv2.imshow('window_1', img)
 
-            ## remove all content that came befor int end
-            img_array = img_array[max_index::]
-
-            #print "new img array length: ", len(img_array)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
             name = self.save_name + str(save_index) + '.png'
-            cv2.imwrite(name, img)
+            if save_index >50 and save_index < 70:
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                cv2.imwrite(name, img)
+                print len(nparr)
+
+                file_name = self.save_name + str(save_index) +'.txt'
+                f_handle = file(file_name, 'a')
+                np.savetxt(f_handle, np.transpose( nparr), \
+                newline='\n', delimiter=',')
+                f_handle.close()
+
 
             save_index += 1
 
@@ -164,7 +198,7 @@ class sockets():
 
             self.conn, self.addr = self.sock.accept()
 
-            #display client information
+             #display client information
             print 'Connected with ' + self.addr[0] + ':' + str(self.addr[1])
             #now keep talking with the client
             #start new thread takes 1st argument as a function name to be run,

@@ -5,38 +5,92 @@ import numpy as np
 import cv2
 import time
 
+print "\n"
+
 cv2.namedWindow('window_1', cv2.WINDOW_NORMAL)
 #x = np.load('test_array')
 
-img_array = np.genfromtxt('int_array_5.txt', delimiter='\t', skip_header=1, \
-                       skip_footer=0, usecols=0, dtype=float)
+
+img_array = np.genfromtxt('./Lepton_1/test_4_56.txt', delimiter='\t', skip_header=1, skip_footer=0, usecols=0, dtype=float)
 
 ## find 30 placeholder
-img_markers = img_array[1::2]
-img_ints = img_array[::2]
+thirty = np.where(img_array == 30)
+print "where thirties: ", thirty[0]
 
-print "image ints: ", img_ints[0:20]
-print "img markers: ", img_markers[0:20]
-print "\n"
+start_thirty = thirty[0][0]
 
-## search for the last row in every image
-int_start =  np.where( img_ints == 59 )
-## seperate the array of indeices
-int_start = int_start[0]
-## add 82 to get to the first row of the next image
-int_start = int_start + 82
+print "total length: ", len(img_array)
+print "thirties: ", len(thirty[0])
 
-print "image starters: ", int_start[0:10]
-print "starter vlaues: ", img_ints [ int_start[0:10]]
-print " images: ", len(int_start)
+thirty_repeat = thirty[0][1::] - thirty[0][0:-1]
+not_thirty_repeat =  np.where(thirty_repeat != 2)[0]
+print "how many not thirty: ", len(not_thirty_repeat)
+print "not step thirty: ", not_thirty_repeat
+not_thirty_step =  thirty_repeat[not_thirty_repeat]
+print "how big step: ", not_thirty_step
 
-not_30 =  np.where(img_markers != 30)[0]
+print "first row: ", not_thirty_repeat[0]
+print "data_index: ", thirty[0][not_thirty_repeat[0]]
 
-print "not thirty: ",  img_markers[ not_30[0:10] ]
+print img_array[ thirty[0][not_thirty_repeat[0]]-3: thirty[0][not_thirty_repeat[0]]+3]
 
-img = np.zeros( (60, 80), dtype = np.uint8)
+print" imge row"
+print not_thirty_repeat[0]+not_thirty_step[0]
+
+not_thirty_diff = not_thirty_repeat[1::] - not_thirty_repeat[0:-1]
+print "not thirty diff: ", not_thirty_diff
 
 
+
+prev_index = 0
+for j in range(15,23):
+    print "where is : ",j,   np.where( img_array == j)[0]
+
+img = np.zeros( ( 60,80), dtype=np.uint8)
+############ row isolation ###########
+img_start = not_thirty_repeat[0]*2 + 4
+
+thirty = thirty[0]
+if thirty[0] > 1:
+    img_start += thirty[0]-1
+else:
+    pass
+print "img start: ", img_start
+for i in range(32): ##len(not_thirty_repeat)-2):
+
+    print "prev difference: ", not_thirty_diff[i]
+    print
+    if not_thirty_diff[i] >= 80 and not_thirty_diff[i] < 82:
+        if i > 0:
+            guess = img_start + 164
+        else:
+            guess = img_start
+    elif not_thirty_diff[i] == 1:
+        continue
+    else:
+        guess = img_start + (not_thirty_diff[i]+2 ) * 2
+        print "################################# short: ", not_thirty_diff[i]
+
+   
+    print "guess   : ", img_array[ guess-5: guess +5 ], img_array[guess]  ## expt 26*2  56
+    data_half = img_array[guess::2]
+    img_row = data_half[1:81]
+    img_row = np.array( (img_row), dtype=np.uint8)
+    row_index = img_array[guess]
+    if row_index > 60:
+        pass
+    else:
+        img[row_index,:] = img_row
+
+    img_start = guess
+    cv2.imshow('window_1', img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+time.sleep(2)
+#img = np.zeros( (60, 80), dtype = np.uint8)
+
+'''
 while(1):
 
     
@@ -51,7 +105,8 @@ while(1):
         ## check for all data tranmission length
         ## 4920 is complete image
         if img_len != 4920:
-            continue
+            continue 
+        
 
         for i in range(60):
 
@@ -75,6 +130,7 @@ while(1):
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+'''
 
 
 
