@@ -111,7 +111,7 @@ class sockets():
             if save_index >50 and save_index < 850:
                 #print "\n"
                 #print "saving..."
-                cv2.imwrite(name, img_array)
+                cv2.imwrite(name, img_arrayP)
                 #print "str: ", len(image_str),"8: ", len(array_8 ), "16:", len(array_16)
 
                 file_name = self.save_name + str(save_index) +'.txt'
