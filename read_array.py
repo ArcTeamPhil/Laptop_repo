@@ -11,7 +11,7 @@ cv2.namedWindow('window_1', cv2.WINDOW_NORMAL)
 #x = np.load('test_array')
 
 
-img_array = np.genfromtxt('./Lepton_1/test_4_56.txt', delimiter='\t', skip_header=1, skip_footer=0, usecols=0, dtype=float)
+img_array = np.genfromtxt('./Lepton_1/test_13_56.txt', delimiter='\t', skip_header=1, skip_footer=0, usecols=0, dtype=float)
 
 ## find 30 placeholder
 thirty = np.where(img_array == 30)

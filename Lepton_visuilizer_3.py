@@ -82,11 +82,12 @@ class sockets():
             #img_list = image_byte.split("\n")
 
             # CV2
-            nparr = np.fromstring(image_str, np.uint8)
+            nparr = np.fromstring(image_str, np.uint16)
 
             ## each pixel is seperated by 30s, find all of them
             try:
-                thirty = np.where(nparr == 30)[0]
+                targets = [30, 31]
+                thirty = np.where(nparr >=30 )[0]
                 print "thirty", len(thirty)
                 print nparr[0:10]
                 ## whenever there is a disruption in the one off sequence, assume new row
@@ -115,7 +116,6 @@ class sockets():
             print "starting img reassembly"
             img_start = not_thirty_repeat[0]*2 + 4
 
-            img_start = not_thirty_repeat[0]*2 + 4
             if thirty[0] > 1:
                 img_start += thirty[0]-1
             else:
@@ -129,8 +129,8 @@ class sockets():
                     if not_thirty_diff[i] >= 80 and not_thirty_diff[i] < 82:
                         if i > 0:
                             guess = img_start + 164
-                    else:
-                        guess = img_start
+                        else:
+                            guess = img_start
 
                     elif not_thirty_diff[i] == 1:
                         continue
@@ -139,19 +139,20 @@ class sockets():
                         print "################################# short: ", not_thirty_diff[i]
 
 
-                        print "guess   : ", img_array[ guess-5: guess +5 ], img_array[guess]  ## expt 26*2  56
-                        data_half = img_array[guess::2]
-                        img_row = data_half[1:81]
-                        img_row = np.array( (img_row), dtype=np.uint8)
-                        row_index = img_array[guess]
-                        if row_index > 60:
+                    print "guess   : ", img_array[ guess-5: guess +5 ], img_array[guess]  ## expt 26*2  56
+                    data_half = img_array[guess::2]
+                    img_row = data_half[1:81]
+                    img_row = np.array( (img_row), dtype=np.uint8)
+                    row_index = img_array[guess]
+
+                    if row_index > 60:
                             pass
                     else:
                         img[row_index,:] = img_row
 
                         img_start = guess
 
-                   print "row updated"
+                    print "row updated"
                    
                 except:
                     print "######################## pass, ", i
