@@ -3,7 +3,10 @@ import cv2
 import os
 from scipy import misc
 import time
+from matplotlib import pyplot as plt
+import matplotlib.animation as animation
 import exifread
+
 
 class img_proc():
 
@@ -32,7 +35,24 @@ class img_proc():
             self.var_dict_["win_name"][self.index] = 'window' + str(self.index)
             cv2.namedWindow( self.var_dict_["win_name"][self.index], cv2.WINDOW_NORMAL)
             self.index += 1
+            
         self.index = 0
+
+        ## plot histogram for images
+        plt.ion()
+        fig = plt.figure()
+        ## ax = fig.add_subplot(111)
+        self.ax = plt.gca()
+        self.ax.set_ylim(0, 1500 )
+
+        x = np.linspace(0,256, 100)
+
+        self.hist, self.bins = np.histogram(x, bins=20)
+
+        self.center = (self.bins[:-1] + self.bins[1:]) / 2
+        self.ax.bar(self.center, self.hist) 
+        ## self.line2, = ax.plot(time_series, resp_chart_filt, 'r-', linewidth = 5.0)
+
 
         for key in self.var_dict_:
             print self.var_dict_[key]
@@ -92,6 +112,7 @@ class img_proc():
 
 
                 bin_name = bin_base + str(index) + '.txt'
+                
                 bin_path = os.path.join(bin_path, bin_name)
 
                 f = open(bin_path, 'r')
@@ -99,43 +120,29 @@ class img_proc():
                 image_str = f.read()
 
                 f.close()
+                tag = "bin_img_" + str(self.index + 1)
 
-                array_16 = np.fromstring( image_str, np.uint16)
+                buffer = np.fromstring( image_str, np.uint16)
+                
+                buffer = buffer /2**8
 
-                self.data_dict_["buffer"] = np.append( self.data_dict_["buffer"], array_16 )
+                
+                self.data_dict_["buffer"] = np.ones(len(buffer), dtype = np.uint8)*256
 
-                if self.index == 0:
-                    self.data_dict_["buffer"] = self.data_dict_["buffer"][2::]
-                else:
-                    pass
+                self.data_dict_["buffer"] = self.data_dict_["buffer"] - buffer
 
-                ## in case of overflow case, start over with current file
-                if len ( self.data_dict_["buffer"]) > 4920:
+                self.data_dict_[tag] = np.reshape( self.data_dict_["buffer"], (60,82) )
 
-                    print "buffer overflow", len ( self.data_dict_["buffer"])
-                    length = 4920
-                    tag = "bin_img_" + str(self.index)
+                self.data_dict_[tag] = self.data_dict_[tag][:, 2::]
 
 
-                    self.data_dict_[tag] = self.data_dict_["buffer"][0:length]
-                    self.data_dict_["buffer"] = self.data_dict_["buffer"][length::]
-
-                    print "buffer solved", len ( self.data_dict_[tag])
-
-                    
-                    self.data_dict_[tag] = np.reshape( self.data_dict_[tag], (60,82) )
-
-                    self.data_dict_[tag] = self.data_dict_[tag][:, 2::]
-
-                    print "image formed"
-                else:
-                    pass
 
                 self.index += 1
-            self.index = 0
-
+        self.index = 0
+            
     def view_img(self, index):
 
+        self.index = 0
         for cam in self.var_dict_["cam_folders"]:
 
             cv2.moveWindow( self.var_dict_["win_name"][self.index], 500, 500*self.index )
@@ -143,13 +150,23 @@ class img_proc():
             cv2.resizeWindow(self.var_dict_["win_name"][self.index],\
                             self.var_dict_["win_dim"][1], self.var_dict_["win_dim"][0])
 
-            tag = "bin_img_" + str(self.index)
+            tag = "bin_img_" + str(self.index + 1)
+
+            self.data_dict_[tag] = np.array ( self.data_dict_[tag], dtype = np.uint8)
             cv2.imshow(self.var_dict_["win_name"][self.index], self.data_dict_[tag])
 
             ## end process
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-            time.sleep(0.005)
+            #time.sleep(0.005)
+
+            if self.index == 0 and index%10 == 0:
+              img_array = np.reshape(  self.data_dict_[tag], (60*80) )
+              self.hist, self.bins = np.histogram(img_array, bins=20)
+              self.center = (self.bins[:-1] + self.bins[1:]) / 2
+              plt.xlim(min(self.bins), max(self.bins))
+              self.ax.bar(self.center, self.hist) 
+              plt.draw()
 
             self.index += 1
         self.index = 0
@@ -157,7 +174,7 @@ class img_proc():
 
 if __name__ == '__main__':
 
-    trials = ['trial_9_16_1']
+    trials = ['trial_9_20_0']
     exe = img_proc(trials)
 
     for i in range(260,800):

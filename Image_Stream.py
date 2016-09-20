@@ -6,6 +6,7 @@ import cv2
 import Image
 import io
 import StringIO
+import os
 from array import array
 
 ## create class for opening and running sockets
@@ -67,10 +68,10 @@ class sockets():
         # init image array
         img_array = np.zeros( (60, 80), dtype = np.uint8)
         buffer = np.zeros( (2),dtype=int)
-        bin_buffer = []
+        bin_buffer = ''
 
         save_index = 0
-
+        index = 0 
         while True:
 
             #print "\n"
@@ -85,45 +86,44 @@ class sockets():
             name = self.save_name + str(save_index) + '.png'
             
             buffer = np.append(buffer, array_16)
-            bin_buffer = bin_buffer.append(image_str)
-
-            if save_index == 0:
+            bin_buffer += image_str
+            
+            if index == 0:
                 buffer = buffer[2::]
             else:
                 pass
 
-                if len(buffer) > 4920:
-                    buffer = array_16
-                    bin_buffer = image_str
+            if len(buffer) > 4920:
+                buffer = array_16
+                bin_buffer = image_str
 
-                elif len(buffer) == 4920:
-                    img_array = np.reshape(buffer, (60,82))
-                    img_array = img_array[:, 2::]
-                    min = np.min(img_array)*1.0
-                    img_array /= 40.0 / 30.0
+            elif len(buffer) == 4920:
+                print "image: ", save_index
+                img_array = np.reshape(buffer, (60,82))
+                img_array = img_array[:, 2::]
+                min = np.min(img_array)*1.0
+                img_array /= 40.0 / 30.0
 
-                    cv2.imshow('window_1', img_array)
+                cv2.imshow('window_1', img_array)
 
-                    if cv2.waitKey(1) & 0xFF == ord('q'):
-                        break
-                    else:
-                        pass
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+                else:
+                    pass
 
+                if save_index < 850:
+                    #cv2.imwrite(name, img_array)
 
+                    file_name = self.save_name + str(save_index) +'.txt'
+                    f_handle = file(file_name, 'a')
 
+                    f_handle.write(bin_buffer)
+                    f_handle.close()
+                else:
+                    pass
 
-            if save_index < 850:
-                #cv2.imwrite(name, img_array)
-
-                file_name = self.save_name + str(save_index) +'.txt'
-                f_handle = file(file_name, 'a')
-
-                f_handle.write(bin_buffer)
-                f_handle.close()
-            else:
-                pass
-
-            save_index += 1
+                save_index += 1
+            index += 1
 
 
 
@@ -164,13 +164,25 @@ if __name__ == '__main__':
 
     ports = int ( raw_input("enter port: ") )
 
-    name = raw_input("enter save name: ")
-    test_day = 'trial_9_20_0/'
+
+    name = raw_input("enter save number: ")
+    test_day = '/trial_9_20_' + name + '/'
+    home_dir = '/media/phil/Backup_Drive_01/'
+    for i in range(1,3):
+
+        path = home_dir + "Lepton_" + str(i) + '/binary' + test_day
+        print path
+        if os.path.isdir(path):
+            print "directory exists"
+            break
+        else:
+
+            os.mkdir(path)
 
     if ports == 11540:
-        name = '/media/phil/Backup_Drive_01/Lepton_1/' + test_day + name + '_'
+        name = home_dir + 'Lepton_1/binary/' + test_day 
     else:
-        name = '/media/phil/Backup_Drive_01/Lepton_2/' + test_day + name + '_'
+        name = home_dir + 'Lepton_2/binary/' + test_day 
     try:
 
         exe = sockets(ports, name)
