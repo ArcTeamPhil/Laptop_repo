@@ -96,7 +96,7 @@ class sockets():
                     img_array = np.reshape(buffer, (60,82))
                     img_array = img_array[:, 2::]
                     min = np.min(img_array)*1.0
-                    img_array /= min / 30.0
+                    img_array /= 40.0 / 30.0
 
                     cv2.imshow('window_1', img_array)
 
@@ -108,10 +108,10 @@ class sockets():
 
 
 
-            if save_index >50 and save_index < 850:
+            if save_index < 850:
                 #print "\n"
                 #print "saving..."
-                cv2.imwrite(name, img_arrayP)
+                cv2.imwrite(name, img_array)
                 #print "str: ", len(image_str),"8: ", len(array_8 ), "16:", len(array_16)
 
                 file_name = self.save_name + str(save_index) +'.txt'
