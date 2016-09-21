@@ -71,7 +71,8 @@ class sockets():
         bin_buffer = ''
 
         save_index = 0
-        index = 0 
+        index = 0
+        skip_index = 0
         while True:
 
             #print "\n"
@@ -98,31 +99,38 @@ class sockets():
                 bin_buffer = image_str
 
             elif len(buffer) == 4920:
-                print "image: ", save_index
-                img_array = np.reshape(buffer, (60,82))
-                img_array = img_array[:, 2::]
-                min = np.min(img_array)*1.0
-                img_array /= 40.0 / 30.0
+                skip_index += 1
 
-                cv2.imshow('window_1', img_array)
+                ## collect every twentieth image
+                if skip_index%20 == 0:
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                    #print "image: ", save_index
+                    img_array = np.reshape(buffer, (60,82))
+                    img_array = img_array[:, 2::]
+                    img_array /= 2.0**8
+
+                    cv2.imshow('window_1', img_array)
+
+                    if cv2.waitKey(1) & 0xFF == ord('q'):
+                        break
+                    else:
+                        pass
+
+                    if save_index < 850:
+                        #cv2.imwrite(name, img_array)
+                        print "saving: ", save_index, "from: ", skip_index
+                        file_name = self.save_name + str(save_index) +'.txt'
+                        f_handle = file(file_name, 'a')
+
+                        f_handle.write(bin_buffer)
+                        f_handle.close()
+                    else:
+                        pass
+
+                    save_index += 1
                 else:
                     pass
 
-                if save_index < 850:
-                    #cv2.imwrite(name, img_array)
-
-                    file_name = self.save_name + str(save_index) +'.txt'
-                    f_handle = file(file_name, 'a')
-
-                    f_handle.write(bin_buffer)
-                    f_handle.close()
-                else:
-                    pass
-
-                save_index += 1
             index += 1
 
 
