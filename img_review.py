@@ -8,7 +8,7 @@ import matplotlib.animation as animation
 import exifread
 
 
-class img_proc():
+class data_extract():
 
     def __init__(self, trials, diff):
 
@@ -223,7 +223,6 @@ class img_proc():
                 #self.fig.set_size_inches(10,10)
 
                 self.cxs[self.index].plot(self.x, self.data_dict_[tag])
-                print "max: ",max(  self.data_dict_[tag] ), index
 
             
             self.index += 1
@@ -276,7 +275,7 @@ if __name__ == '__main__':
     diff = end - start
     trials = ['trial_9_21_0']
     save_file = 'trial_9_21_0_noise_'
-    exe = img_proc(trials, end)
+    exe = data_extract(trials, end)
 
     for i in range(start, end):
 
@@ -291,11 +290,4 @@ if __name__ == '__main__':
         
     
 '''
-self.hist, self.bins = np.histogram(img_array, bins=20)
-self.center = (self.bins[:-1] + self.bins[1:]) / 2
-x_low = min(self.bins)
-x_high = max(self.bins)
-print x_high
-self.cxs[0].set_xlim( [x_low, x_high ] )
-self.cxs[0].bar(self.center, self.hist)
 '''
