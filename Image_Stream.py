@@ -116,7 +116,7 @@ class sockets():
                     else:
                         pass
 
-                    if save_index < 850:
+                    if save_index < 3000:
                         #cv2.imwrite(name, img_array)
                         print "saving: ", save_index, "from: ", skip_index
                         file_name = self.save_name + str(save_index) +'.txt'
@@ -174,7 +174,7 @@ if __name__ == '__main__':
 
 
     name = raw_input("enter save number: ")
-    test_day = '/trial_9_20_' + name + '/'
+    test_day = '/trial_9_21_' + name + '/'
     home_dir = '/media/phil/Backup_Drive_01/'
     for i in range(1,3):
 
