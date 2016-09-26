@@ -108,6 +108,7 @@ class sockets():
                     img_array = np.reshape(buffer, (60,82))
                     img_array = img_array[:, 2::]
                     img_array /= 2.0**8
+                    img_array = np.array(img_array, dtype=np.uint8)
 
                     cv2.imshow('window_1', img_array)
 
@@ -174,7 +175,7 @@ if __name__ == '__main__':
 
 
     name = raw_input("enter save number: ")
-    test_day = '/trial_9_21_' + name + '/'
+    test_day = '/trial_9_26_' + name + '/'
     home_dir = '/media/phil/Backup_Drive_01/'
     for i in range(1,3):
 

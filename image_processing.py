@@ -29,9 +29,9 @@ class img_proc():
         for i in range(2):
             self.cxs[i] = plt.gca()
         '''
-        self.var_array = np.zeros((100), dtype = float)
+        self.var_array = np.zeros((end), dtype = float)
         
-        self.trial = np.linspace(0,100,100)
+        self.trial = np.linspace(0,end,end)
 
     def var_mean(self, index, end):
 
@@ -54,21 +54,21 @@ class img_proc():
         self.data_dict_["mean_diff"] = self.data_dict_["mean_0"] - self.data_dict_["mean_1"] 
         
         for cam in range(2):
-            self.cxs[cam].set_ylim( [0,100] )
-            self.cxs[cam].plot(self.trial, self.data_dict_["var_" + str(cam)] )
-            self.cxs[cam].plot(self.trial, self.data_dict_["mean_" + str(cam)] )
+            #self.cxs[cam].set_ylim( [0,300] )
+            self.cxs[0].plot(self.trial, self.data_dict_["var_" + str(cam)] )
+            self.cxs[1].plot(self.trial, self.data_dict_["mean_" + str(cam)] )
 
         self.cxs[-1].plot(self.trial, self.data_dict_["var_diff"] )
         self.cxs[-1].plot(self.trial, self.data_dict_["mean_diff"] )
 
 if __name__ == "__main__":
 
-    save_file = 'trial_9_21_0_noise_'
+    save_file = 'trial_9_26_3_noise_'
 
-    end = 100
+    end = 500
     exe = img_proc(save_file,end)
 
-    for i in range(10, end):
+    for i in range(0, end):
         exe.var_mean(i, end)
         print i
     exe.plot(end)

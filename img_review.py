@@ -25,10 +25,10 @@ class data_extract():
         print self.var_dict_["win_name"]
         self.data_dict_ = {}
         self.data_dict_["buffer"] = np.zeros( (2),dtype=int)
-        self.data_dict_["img_0"] = np.zeros( (60, 80), dtype = np.uint8)
-        self.data_dict_["img_1"] = np.zeros( (60, 80), dtype = np.uint8)
-        self.data_dict_["bin_img_0"] =  np.zeros( (60, 80), dtype = np.uint16)
-        self.data_dict_["bin_img_1"] =  np.zeros( (60, 80), dtype = np.uint16)
+        self.data_dict_["img_0"] = np.zeros( (60, 80), dtype = np.uint16)
+        self.data_dict_["img_1"] = np.zeros( (60, 80), dtype = np.uint16)
+        self.data_dict_["bin_img_0"] =  np.zeros( (60, 80), dtype = np.uint8)
+        self.data_dict_["bin_img_1"] =  np.zeros( (60, 80), dtype = np.uint8)
         self.data_dict_["int_0"] = np.zeros( (diff), dtype = float)
         self.data_dict_["int_1"] = np.zeros( (diff), dtype = float)
         self.data_dict_["noise_0"] = np.zeros( (80*3), dtype = float)
@@ -50,9 +50,6 @@ class data_extract():
         plt.ion()
 
         self.fig, self.cxs = plt.subplots(1,2, facecolor='w', edgecolor='k' )
-        #self.fig.set_figheight(10)
-        #self.fig.set_figwidth(10)
-        #self.fig.set_size_inches(10,10)
 
         for i in range(2):
           self.cxs[i] = plt.gca()
@@ -98,8 +95,6 @@ class data_extract():
                 image_str = f.read()
 
                 f.close()
-                ## set the tag mark for the dictionary
-                tag = "bin_img_" + str(self.index)
 
                 ## convert binary to unsigned 16 bit
                 array_16 = np.fromstring( image_str, np.uint16)
@@ -116,25 +111,15 @@ class data_extract():
                 #print "buffer 16: ", max(buffer)
 
                 ## use top  three rows as normalization location
-                '''
-                hist_equ = np.median(buffer[0:3*80])
-                #print hist_equ
-                #hist_equ = 65535.0 /10.0
-                buffer = buffer - hist_equ
-
-                buff_neg = np.where(buffer < 0)[0]
-                buffer[buff_neg] = 0
-                #buffer /= hist_equ
-
-                buffer = buffer / (2.0**16-hist_equ)*255
-                buffer = np.array( buffer, dtype = np.uint8)
-                #print max(buffer)
-                '''
                 ## transfer image to 8 bit for viewing
                 buffer = buffer /2.0**8
                 buffer -= 1
-                print "buffer 8bit: ", max(buffer)
+                #print "buffer 8bit: ", max(buffer)
                 ## rearrange buffer to image size and pre-info
+
+                ## set the tag mark for the dictionary
+                tag = "bin_img_" + str(self.index)
+
                 self.data_dict_[tag] = np.reshape( buffer, (60,82) )
                 ## remove pre-info
                 self.data_dict_[tag] = self.data_dict_[tag][:, 2::]
@@ -155,15 +140,16 @@ class data_extract():
 
             ## draw green (0,255,0) circle over nostril
             cv2.circle(mask,(roi[1], roi[0]), int(self.radius), 255,-1)
-
+            max_div = np.sum(mask)/255.0
             focus = np.where( mask == 255)[0]
 
             ## use the orgina limage 16 bit for processing
-            intensity = np.sum(self.data_dict_["img_"+str(self.index)][focus] ) / np.pi / self.radius**2 / 2.0**16 
-            print "intensity 16 bit: ", intensity
+            intensity = np.sum(self.data_dict_["img_"+str(self.index)][focus] )
+            intensity /= max_div**2
 
-            tag = "bin_img_" + str(self.index)
-            noise = self.data_dict_[tag][0:3,:]
+            #print "intensity 16 bit: ", intensity
+
+            noise = self.data_dict_["img_"+str(self.index)][29:32,:]
             noise = np.reshape( noise, 80*3)
             
             tag = "noise_" + str(self.index)
@@ -195,6 +181,7 @@ class data_extract():
             self.data_dict_[tag] = np.array ( self.data_dict_[tag], dtype = np.uint8)
             ## show the image
             cv2.imshow(self.var_dict_["win_name"][self.index], self.data_dict_[tag])
+            print index
 
             ## end process
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -217,10 +204,6 @@ class data_extract():
                 tag = "int_" + str(self.index)
                 self.cxs[self.index].set_xlim([0,self.diff])
                 self.cxs[self.index].set_ylim([0,100])
-                #self.fig.set_figheight(10)
-                #self.fig.set_figwidth(10)
-
-                #self.fig.set_size_inches(10,10)
 
                 self.cxs[self.index].plot(self.x, self.data_dict_[tag])
 
@@ -245,22 +228,20 @@ class data_extract():
     def save_noise(self,index):
 
         ## every thirty frames look at the noise
-        if index%30 == 0:
-            self.index = 0
-            for cam in self.var_dict_["cam_folders"]:
+        ##if index%30 == 0:
+        self.index = 0
+        for cam in self.var_dict_["cam_folders"]:
 
-                tag = "noise_" + str(self.index)
-                prefix = self.var_dict_["trials"][0]
-                #np.savetxt(tag, self.data_dict_[tag])
-                f = open(prefix + "_" + tag, 'a')
-                np.savetxt( f, self.data_dict_[tag].reshape(1, self.data_dict_[tag].shape[0]), delimiter =','  )
-                f.close()
-                self.index += 1
+            tag = "noise_" + str(self.index)
+            prefix = self.var_dict_["trials"][0]
+            #np.savetxt(tag, self.data_dict_[tag])
+            f = open(prefix + "_" + tag, 'a')
+            np.savetxt( f, self.data_dict_[tag].reshape(1, self.data_dict_[tag].shape[0]), delimiter =','  )
+            f.close()
+            self.index += 1
 
-            self.index = 0
+        self.index = 0
 
-        else:
-            pass
 
 
         
@@ -271,14 +252,13 @@ if __name__ == '__main__':
 
 
     start = 0
-    end = 3000
+    end = 500
     diff = end - start
-    trials = ['trial_9_21_0']
-    save_file = 'trial_9_21_0_noise_'
+    trials = ['trial_9_26_3']
     exe = data_extract(trials, end)
 
     for i in range(start, end):
-
+        
         exe.load_bin(i)
         exe.proc_img(i)
         exe.view_img(i)
