@@ -42,11 +42,26 @@ class img_proc():
 
             
             img_array = np.array(img_array, dtype = float)
-            self.data_dict_["var_"+str(cam)][index] = np.var(img_array)
+
+            
+            self.data_dict_["var_"+str(cam)][index] = np.var(img_array) / 2.0**16
 
             self.data_dict_["mean_"+str(cam)][index] = np.mean(img_array)
 
-            
+
+            ## save mean
+            tag = "mean_" + str(cam)
+            prefix = self.var_dict_["save_file"]
+            np.savetxt(prefix + "_" + tag, self.data_dict_["mean_"+str(cam)])
+
+            ## save var
+            tag = "var_" + str(cam)
+            prefix = self.var_dict_["save_file"]
+            np.savetxt(prefix + "_" + tag, self.data_dict_["var_"+str(cam)])
+
+
+
+
     def plot(self, end):
 
         self.data_dict_["var_diff"] = self.data_dict_["var_0"] - self.data_dict_["var_1"] 
@@ -58,17 +73,19 @@ class img_proc():
             self.cxs[0].plot(self.trial, self.data_dict_["var_" + str(cam)] )
             self.cxs[1].plot(self.trial, self.data_dict_["mean_" + str(cam)] )
 
+            self.cxs[0].set_yscale('log')
+            
         self.cxs[-1].plot(self.trial, self.data_dict_["var_diff"] )
         self.cxs[-1].plot(self.trial, self.data_dict_["mean_diff"] )
 
 if __name__ == "__main__":
 
-    save_file = 'trial_9_26_3_noise_'
+    save_file = 'trial_9_27_3_noise_'
 
-    end = 500
+    end = 3000
     exe = img_proc(save_file,end)
 
-    for i in range(0, end):
+    for i in range(1, end):
         exe.var_mean(i, end)
         print i
     exe.plot(end)

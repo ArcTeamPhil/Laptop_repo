@@ -99,21 +99,20 @@ class data_extract():
                 ## convert binary to unsigned 16 bit
                 array_16 = np.fromstring( image_str, np.uint16)
 
-                ## create the buffer the inverse image will go into
-                buffer = np.ones(len(array_16), dtype = np.uint16)*(2**16-1)
+                mini = np.min(array_16)
+                maxi = np.max(array_16)
 
-                ## subtract the two
-                buffer -= array_16
+
 
                 ## preserve orgininal image contents 16 bit
-                self.data_dict_["img_"+str(self.index)] = np.reshape(buffer, (60,82) )
+                self.data_dict_["img_"+str(self.index)] = np.reshape(array_16, (60,82) )
                 self.data_dict_["img_"+str(self.index)] = self.data_dict_["img_"+str(self.index)][:, 2::] 
                 #print "buffer 16: ", max(buffer)
 
                 ## use top  three rows as normalization location
                 ## transfer image to 8 bit for viewing
-                buffer = buffer /2.0**8
-                buffer -= 1
+                buffer = array_16 /2.0**8
+                #buffer -= 1
                 #print "buffer 8bit: ", max(buffer)
                 ## rearrange buffer to image size and pre-info
 
@@ -203,7 +202,7 @@ class data_extract():
                 ## grab intensity values
                 tag = "int_" + str(self.index)
                 self.cxs[self.index].set_xlim([0,self.diff])
-                self.cxs[self.index].set_ylim([0,100])
+                self.cxs[self.index].set_ylim([0,65000])
 
                 self.cxs[self.index].plot(self.x, self.data_dict_[tag])
 
@@ -252,9 +251,9 @@ if __name__ == '__main__':
 
 
     start = 0
-    end = 500
+    end = 3000
     diff = end - start
-    trials = ['trial_9_26_3']
+    trials = ['trial_9_27_3']
     exe = data_extract(trials, end)
 
     for i in range(start, end):
