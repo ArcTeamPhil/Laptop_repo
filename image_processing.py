@@ -80,7 +80,7 @@ class img_proc():
 
 if __name__ == "__main__":
 
-    save_file = 'trial_9_27_3_noise_'
+    save_file = 'trial_10_1_2_noise_'
 
     end = 3000
     exe = img_proc(save_file,end)

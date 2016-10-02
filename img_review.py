@@ -19,7 +19,7 @@ class data_extract():
         self.var_dict_["win_name"] = [None]*len(trials)*2
         self.var_dict_["cam_folders"] = ['Lepton_1/imgs/', 'Lepton_2/imgs/']
         self.var_dict_["bin_folders"] = ['Lepton_1/binary', 'Lepton_2/binary']
-        self.var_dict_["img_roi"] = [ [35,33], [39,34]]
+        self.var_dict_["img_roi"] = [ [41,40], [39,36]] ##[[22, 47], [21,43]] 
 
         
         print self.var_dict_["win_name"]
@@ -31,8 +31,8 @@ class data_extract():
         self.data_dict_["bin_img_1"] =  np.zeros( (60, 80), dtype = np.uint8)
         self.data_dict_["int_0"] = np.zeros( (diff), dtype = float)
         self.data_dict_["int_1"] = np.zeros( (diff), dtype = float)
-        self.data_dict_["noise_0"] = np.zeros( (80*3), dtype = float)
-        self.data_dict_["noise_1"] = np.zeros( (80*3), dtype = float)
+        self.data_dict_["noise_0"] = np.zeros( (80*60/30), dtype = float)
+        self.data_dict_["noise_1"] = np.zeros( (80*60/30), dtype = float)
 
 
         ## create windows for viewing images
@@ -54,7 +54,7 @@ class data_extract():
         for i in range(2):
           self.cxs[i] = plt.gca()
 
-          self.cxs[i].set_ylim([0, 100])
+          #self.cxs[i].set_ylim([0, 100])
           self.cxs[i].set_xlim([0,diff])
 
 
@@ -99,9 +99,6 @@ class data_extract():
                 ## convert binary to unsigned 16 bit
                 array_16 = np.fromstring( image_str, np.uint16)
 
-                mini = np.min(array_16)
-                maxi = np.max(array_16)
-
 
 
                 ## preserve orgininal image contents 16 bit
@@ -111,7 +108,23 @@ class data_extract():
 
                 ## use top  three rows as normalization location
                 ## transfer image to 8 bit for viewing
-                buffer = array_16 /2.0**8
+                low_lim = 40000
+                low_curve = np.where(array_16 <low_lim)
+                #high_lim = 60000
+                high_curve = np.where(array_16>low_lim)
+
+                print "len low: ", len(low_curve[0])
+                print "lwn high: ", len(high_curve[0])
+                buffer = array_16
+                buffer = np.array(buffer, dtype=float)
+                print "max pre: ",  np.max(buffer)
+                buffer[low_curve] /= 2.0**8 
+                buffer[low_curve] *= 245
+                buffer[high_curve] /= 2.0**8 
+                buffer[high_curve] *= 10.0
+                buffer[high_curve] += 245.0
+                #buffer = np.array(buffer, dtype=np.uint8)
+                print "max: ",  np.max(buffer)
                 #buffer -= 1
                 #print "buffer 8bit: ", max(buffer)
                 ## rearrange buffer to image size and pre-info
@@ -140,17 +153,20 @@ class data_extract():
             ## draw green (0,255,0) circle over nostril
             cv2.circle(mask,(roi[1], roi[0]), int(self.radius), 255,-1)
             max_div = np.sum(mask)/255.0
-            focus = np.where( mask == 255)[0]
-
+            focus = np.where( mask == 255)
+            #print "focus: ", focus
             ## use the orgina limage 16 bit for processing
-            intensity = np.sum(self.data_dict_["img_"+str(self.index)][focus] )
-            intensity /= max_div**2
+            int_array = self.data_dict_["img_"+str(self.index)][focus]
+            #print int_array
+            intensity = np.sum(int_array)
+            intensity /= max_div
 
-            #print "intensity 16 bit: ", intensity
+            #print "intensity: ", intensity
 
-            noise = self.data_dict_["img_"+str(self.index)][29:32,:]
-            noise = np.reshape( noise, 80*3)
-            
+            noise = self.data_dict_["img_"+str(self.index)]
+            noise = np.reshape( noise, 80*60)
+            noise = noise[::30]
+
             tag = "noise_" + str(self.index)
             self.data_dict_[tag] = noise
 
@@ -185,7 +201,7 @@ class data_extract():
             ## end process
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-            time.sleep(0.005)
+            #time.sleep(0.005)
 
             self.index += 1
         self.index = 0
@@ -202,7 +218,7 @@ class data_extract():
                 ## grab intensity values
                 tag = "int_" + str(self.index)
                 self.cxs[self.index].set_xlim([0,self.diff])
-                self.cxs[self.index].set_ylim([0,65000])
+                #self.cxs[self.index].set_ylim([0,65000])
 
                 self.cxs[self.index].plot(self.x, self.data_dict_[tag])
 
@@ -226,8 +242,6 @@ class data_extract():
 
     def save_noise(self,index):
 
-        ## every thirty frames look at the noise
-        ##if index%30 == 0:
         self.index = 0
         for cam in self.var_dict_["cam_folders"]:
 
@@ -253,7 +267,7 @@ if __name__ == '__main__':
     start = 0
     end = 3000
     diff = end - start
-    trials = ['trial_9_27_3']
+    trials = ['trial_10_1_1']
     exe = data_extract(trials, end)
 
     for i in range(start, end):
@@ -262,8 +276,8 @@ if __name__ == '__main__':
         exe.proc_img(i)
         exe.view_img(i)
         exe.view_int(i)
-        exe.save_int(i)
-        exe.save_noise(i)
+        #exe.save_int(i)
+        #exe.save_noise(i)
 
         
         
