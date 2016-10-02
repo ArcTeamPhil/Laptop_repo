@@ -19,7 +19,7 @@ class data_extract():
         self.var_dict_["win_name"] = [None]*len(trials)*2
         self.var_dict_["cam_folders"] = ['Lepton_1/imgs/', 'Lepton_2/imgs/']
         self.var_dict_["bin_folders"] = ['Lepton_1/binary', 'Lepton_2/binary']
-        self.var_dict_["img_roi"] = [ [41,40], [39,36]] ##[[22, 47], [21,43]] 
+        self.var_dict_["img_roi"] = [ [42,38], [42,34]] ##[[22, 47], [21,43]] ## [[27,45], [29,41]] 
 
         
         print self.var_dict_["win_name"]
@@ -43,7 +43,7 @@ class data_extract():
             self.index += 1
             
         self.index = 0
-        self.radius = 5.0
+        self.radius = 3.0
         self.diff = diff
 
         ## plot histogram for images
@@ -113,8 +113,8 @@ class data_extract():
                 #high_lim = 60000
                 high_curve = np.where(array_16>low_lim)
 
-                print "len low: ", len(low_curve[0])
-                print "lwn high: ", len(high_curve[0])
+                #print "len low: ", len(low_curve[0])
+                #print "lwn high: ", len(high_curve[0])
                 buffer = array_16
                 buffer = np.array(buffer, dtype=float)
                 print "max pre: ",  np.max(buffer)
@@ -124,7 +124,7 @@ class data_extract():
                 buffer[high_curve] *= 10.0
                 buffer[high_curve] += 245.0
                 #buffer = np.array(buffer, dtype=np.uint8)
-                print "max: ",  np.max(buffer)
+                #print "max: ",  np.max(buffer)
                 #buffer -= 1
                 #print "buffer 8bit: ", max(buffer)
                 ## rearrange buffer to image size and pre-info
@@ -253,7 +253,7 @@ class data_extract():
             f.close()
             self.index += 1
 
-        self.index = 0
+        self.index = 0 
 
 
 
@@ -264,10 +264,10 @@ class data_extract():
 if __name__ == '__main__':
 
 
-    start = 0
+    start = 2000
     end = 3000
     diff = end - start
-    trials = ['trial_10_1_1']
+    trials = ['trial_10_2_2']
     exe = data_extract(trials, end)
 
     for i in range(start, end):
