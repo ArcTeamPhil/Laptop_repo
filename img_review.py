@@ -19,7 +19,7 @@ class data_extract():
         self.var_dict_["win_name"] = [None]*len(trials)*2
         self.var_dict_["cam_folders"] = ['Lepton_1/imgs/', 'Lepton_2/imgs/']
         self.var_dict_["bin_folders"] = ['Lepton_1/binary', 'Lepton_2/binary']
-        self.var_dict_["img_roi"] = [ [42,38], [42,34]] ##[[22, 47], [21,43]] ## [[27,45], [29,41]] 
+        self.var_dict_["img_roi"] = [[55,40], [55, 38] ] ##[ [42,38], [42,34]] ##[[22, 47], [21,43]] ## [[27,45], [29,41]] 
 
         
         print self.var_dict_["win_name"]
@@ -63,7 +63,9 @@ class data_extract():
           self.cxs[i].plot( self.x, self.data_dict_[tag])
 
 
-       
+          ## get time history of average backgroun
+          self.data_dict_["bck_grd_" +str(i)] = np.array( (1), dtype=float)
+
     def load_bin(self, index):
 
         self.index = 0
@@ -108,27 +110,67 @@ class data_extract():
 
                 ## use top  three rows as normalization location
                 ## transfer image to 8 bit for viewing
-                low_lim = 40000
-                low_curve = np.where(array_16 <low_lim)
-                #high_lim = 60000
-                high_curve = np.where(array_16>low_lim)
 
+                ## bring both images into same color contrast
+                array_16 -= 10000
+
+
+                roi = self.var_dict_["img_roi"][self.index]
+
+                spacing = 2
+                int_array = array_16[::30]
+                intensity = np.sum(int_array)
+
+
+                intensity /= (82*60/30)
+
+                self.data_dict_["bck_grd_" +str(self.index)] = np.hstack(( self.data_dict_["bck_grd_" +str(self.index)], intensity))
+
+                if len(self.data_dict_["bck_grd_" +str(self.index)]) > 30:
+                    self.data_dict_["bck_grd_" +str(self.index)] = self.data_dict_["bck_grd_" +str(self.index)][1:30]
+
+                print "intensity: ", intensity
+                print "array: ", np.median(self.data_dict_["bck_grd_" + str(self.index)])
+
+
+                avg_bck_grd = np.median(self.data_dict_["bck_grd_" +str(self.index)])
+
+                #print intensity
+                low_lim = avg_bck_grd - 5000
+                low_curve = np.where(array_16 <low_lim)
+                high_lim = avg_bck_grd + 12000
+                if high_lim >= 2**16 -1:
+                    high_lim = 2**16-1
+                high_curve = np.where(array_16>high_lim)
+                print "high: ",len (high_curve[0])
+                print "low: ", len(low_curve[0])
                 #print "len low: ", len(low_curve[0])
                 #print "lwn high: ", len(high_curve[0])
                 buffer = array_16
                 buffer = np.array(buffer, dtype=float)
-                print "max pre: ",  np.max(buffer)
-                buffer[low_curve] /= 2.0**8 
-                buffer[low_curve] *= 245
-                buffer[high_curve] /= 2.0**8 
-                buffer[high_curve] *= 10.0
-                buffer[high_curve] += 245.0
+                #print "max pre: ",  np.max(buffer)
+                #buffer[low_curve] *= 10.0
+                buffer -= (2**16 - low_lim)
+                #buffer[high_curve] /= 2.0**8 
+                buffer /= (2**16-low_lim)
+                buffer *= 255.0
+
+
+                buffer[low_curve] = 0.0 #2.0**8
+                buffer[high_curve] = 255.0
+
+                #buffer[high_curve] += 245.0
                 #buffer = np.array(buffer, dtype=np.uint8)
                 #print "max: ",  np.max(buffer)
                 #buffer -= 1
                 #print "buffer 8bit: ", max(buffer)
                 ## rearrange buffer to image size and pre-info
 
+
+
+
+
+                #buffer[32*80]
                 ## set the tag mark for the dictionary
                 tag = "bin_img_" + str(self.index)
 
@@ -136,6 +178,15 @@ class data_extract():
                 ## remove pre-info
                 self.data_dict_[tag] = self.data_dict_[tag][:, 2::]
 
+
+
+                ## filter image
+                self.data_dict_[tag] = np.array(self.data_dict_[tag], dtype=np.uint8)
+
+                self.data_dict_[tag]= cv2.cvtColor(self.data_dict_[tag], cv2.COLOR_BAYER_GB2RGB)
+                self.data_dict_[tag]= cv2.medianBlur(self.data_dict_[tag], 3)
+
+                self.data_dict_[tag] = cv2.cvtColor(self.data_dict_[tag], cv2.COLOR_RGB2GRAY)
 
 
                 self.index += 1
@@ -267,7 +318,7 @@ if __name__ == '__main__':
     start = 2000
     end = 3000
     diff = end - start
-    trials = ['trial_10_2_2']
+    trials = ['trial_10_1_2']
     exe = data_extract(trials, end)
 
     for i in range(start, end):

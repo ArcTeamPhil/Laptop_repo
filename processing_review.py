@@ -71,7 +71,7 @@ class proc_rev():
 if __name__ == "__main__":
 
     ## set trial names
-    trials = [ '10_2_2', '10_1_2']
+    trials = [ '10_2_0', '10_2_1', '10_2_2']
     prefix = 'trial_'
     suffix_noise = '_noise__mean_'
     suffix_int = '_int_'
