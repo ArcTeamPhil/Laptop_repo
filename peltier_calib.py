@@ -9,13 +9,15 @@ class main():
         self.data_dict = {}
         self.var_dict = {}
 
-        self.var_dict["voltages"] = ["0_5", "1_0", "1_5", "2_0", "2_5"] ## voltage in
+        self.var_dict["voltages"] = [ "1_0", "1_5", "2_0", "2_5", "3_0"] ## voltage in
         self.var_dict["peltier"] = ["b", "p"]   ## black and pink
         self.var_dict["board"] = ["d", "s"]   ## denver and spice
+        self.var_dict["cooling"] = ["nofan", "fan"]  ## on or off fan cooling
         self.var_dict["folder"] = folder
         self.var_dict["start"] = start
         self.var_dict["cutoff"] = cutoff
-        self.var_dict["test"] = [ "denver", "spicer", "denver pink", "spicer pink" ]
+        self.var_dict["test"] = [ "denver black nofan", "spicer black nofan", "denver pink nofan", "spicer pink nofan", \
+        "denver black fan", "spicer black fan", "denver pink fan", "spicer pink fan",]
 
     def load_data(self):
 
@@ -24,11 +26,12 @@ class main():
         for gen in self.var_dict["peltier"]:
             for volt in self.var_dict["voltages"]:
                 for board in self.var_dict["board"]:
+                    for cool in self.var_dict["cooling"]:
 
-                    tag = volt + "V_" + gen + board
-                    ## only take time and temp
-                    self.data_dict[tag] = np.genfromtxt(tag +".csv", delimiter = ",", \
-                                                        usecols=(2,3), skip_header=(1))
+                        tag = volt + "_" + gen + board + '_' + cool
+                        ## only take time and temp
+                        self.data_dict[tag] = np.genfromtxt(tag +".csv", delimiter = ",", \
+                                                            usecols=(2,3), skip_header=(1)) ## 45 hot
 
 
     def plot_data(self):
@@ -39,31 +42,33 @@ class main():
 
             color_index = 0
             for gen in self.var_dict["peltier"]:
-                colors = ["r", "b", "r--", "b--", "ro", 'bo']
+                colors = ["r", "r--", "*b", "b", "m", 'm--', '*c', 'c']
                 for board in self.var_dict["board"]:
 
-                    tag = volt + "V_" + gen + board
+                    for cool in self.var_dict["cooling"]:
 
-                    test = self.var_dict["test"][color_index]
+                        tag = volt + "_" + gen + board + '_' + cool
 
-                    plt.figure(volt_index)
-                    plt.plot( self.data_dict[tag][start:cutoff,0], self.data_dict[tag][start:cutoff,1], colors[color_index], label = test)
-                    plt.title(volt)
+                        test = self.var_dict["test"][color_index]
 
-                    print colors[color_index], tag, color_index, pelt_index
+                        plt.figure(volt_index)
+                        plt.plot( self.data_dict[tag][start:cutoff,0], self.data_dict[tag][start:cutoff,1], colors[color_index], label = tag)
+                        plt.title(volt)
 
-                    color_index += 1
+                        print colors[color_index], tag, color_index, pelt_index
 
-                plt.legend( bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=len(self.var_dict["test"]), mode="expand", \
+                        color_index += 1
+
+                plt.legend( bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=len(self.var_dict["test"])/2, mode="expand", \
                             borderaxespad=0. )
                 pelt_index += 1
             volt_index += 1
 
 if __name__ == "__main__":
 
-    folder = "./peltier_data"
-    cutoff = 5 * 60
-    start = 5 * 30
+    folder = "./peltier_data_2"
+    cutoff = 5 * 180
+    start = 0 ##5 * 30
     exe = main(folder, start, cutoff)
     exe.load_data()
     exe.plot_data()
