@@ -175,7 +175,7 @@ if __name__ == '__main__':
 
 
     name = raw_input("enter save number: ")
-    test_day = '/trial_10_2_' + name + '/'
+    test_day = '/trial_10_18_' + name + '/'
     home_dir = '/media/phil/Backup_Drive_01/'
     for i in range(1,3):
 

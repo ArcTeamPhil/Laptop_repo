@@ -19,7 +19,7 @@ class data_extract():
         self.var_dict_["win_name"] = [None]*len(trials)*2
         self.var_dict_["cam_folders"] = ['Lepton_1/imgs/', 'Lepton_2/imgs/']
         self.var_dict_["bin_folders"] = ['Lepton_1/binary', 'Lepton_2/binary']
-        self.var_dict_["img_roi"] = [[5,5], [5, 5] ] ##[[27,45], [29,41]] ##[[22, 47], [21,43]]##  ##[ [42,38], [42,34]] ##] ## ] 
+        self.var_dict_["img_roi"] = [[34,39], [40, 34] ] ##[[27,45], [29,41]] ##[[22, 47], [21,43]]##  ##[ [42,38], [42,34]] ##] ## ] 
 
         
         print self.var_dict_["win_name"]
@@ -228,7 +228,7 @@ class data_extract():
 
 
             tag = "bin_img_" + str(self.index)
-            #cv2.circle(self.data_dict_[tag], (roi[1], roi[0]), int(self.radius), 255, 1)
+            cv2.circle(self.data_dict_[tag], (roi[1], roi[0]), int(self.radius), 255, 1)
 
             self.index += 1
 
@@ -333,11 +333,11 @@ class data_extract():
 if __name__ == '__main__':
 
 
-    start = 2400
-    end = 2410
+    start = 0
+    end = 950
     diff = end - start
     save_fold = "trial_data/"
-    trials = ['trial_10_2_2']
+    trials = ['trial_10_18_0']
     exe = data_extract(trials, end)
 
     for i in range(start, end):
@@ -346,9 +346,9 @@ if __name__ == '__main__':
         exe.proc_img(i)
         exe.view_img(i)
         exe.view_int(i)
-        #exe.save_int(i,save_fold)
-        #exe.save_noise(i,save_fold)
-        exe.save_image(i,save_fold)
+        exe.save_int(i,save_fold)
+        exe.save_noise(i,save_fold)
+        ##exe.save_image(i,save_fold)
 
         
         

@@ -44,8 +44,11 @@ class proc_rev():
             cutoff = self.var_dict["cutoff"]
             time = np.linspace(0, len(self.data_dict[file])-cutoff, len(self.data_dict[file])-cutoff )
             
-            self.cxs[int(self.index)].plot(time, self.data_dict[file][cutoff::] )
+            self.cxs[int(self.index)].plot(time, self.data_dict[file][cutoff::] , label=file)
             self.cxs[int(self.index)].set_title(file[0:-6])
+            print file, index
+            self.cxs[int(self.index)].legend()
+            self.cxs[int(self.index)].set_title(file)
             #self.cxs[int(self.index)].set_yscale('log')
             
             #print file
@@ -71,8 +74,8 @@ class proc_rev():
 if __name__ == "__main__":
 
     ## set trial names
-    trials = [ '10_2_0', '10_2_1', '10_2_2']
-    prefix = 'trial_'
+    trials = [ '10_1_0', '10_17_0']
+    prefix = 'trial_data/trial_'
     suffix_noise = '_noise__mean_'
     suffix_int = '_int_'
 

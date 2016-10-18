@@ -80,9 +80,9 @@ class img_proc():
 
 if __name__ == "__main__":
 
-    save_file = 'trial_10_1_2_noise_'
+    save_file = 'trial_data/trial_10_18_0_noise_'
 
-    end = 3000
+    end = 950
     exe = img_proc(save_file,end)
 
     for i in range(1, end):

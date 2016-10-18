@@ -31,7 +31,7 @@ class main():
                         tag = volt + "_" + gen + board + '_' + cool
                         ## only take time and temp
                         self.data_dict[tag] = np.genfromtxt(tag +".csv", delimiter = ",", \
-                                                            usecols=(2,3), skip_header=(1)) ## 45 hot
+                                                            usecols=(2,3), skip_header=(1)) ## 45 hot, 23 cold
 
 
     def plot_data(self):
@@ -42,7 +42,7 @@ class main():
 
             color_index = 0
             for gen in self.var_dict["peltier"]:
-                colors = ["r", "r--", "*b", "b", "m", 'm--', '*c', 'c']
+                colors = [ "k", 'k--', '*k', '*k--', "m", "m--", "*m", "*m--"]
                 for board in self.var_dict["board"]:
 
                     for cool in self.var_dict["cooling"]:
@@ -52,7 +52,10 @@ class main():
                         test = self.var_dict["test"][color_index]
 
                         plt.figure(volt_index)
-                        plt.plot( self.data_dict[tag][start:cutoff,0], self.data_dict[tag][start:cutoff,1], colors[color_index], label = tag)
+                        x = self.data_dict[tag][::20,0]
+
+                        y = self.data_dict[tag][::20,1]
+                        plt.plot(x[start/20:cutoff/20],  y[start/20:cutoff/20], colors[color_index], label = tag)
                         plt.title(volt)
 
                         print colors[color_index], tag, color_index, pelt_index
