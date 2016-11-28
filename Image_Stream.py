@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import socket
 import sys
 from thread import *
@@ -8,7 +10,7 @@ import io
 import StringIO
 import os
 from array import array
-
+import datetime
 ## create class for opening and running sockets
 
 
@@ -47,6 +49,7 @@ class sockets():
 
         try:
             self.sock.bind((self.host, self.ports))
+            print "port connection: ", self.ports
             print 'Bind Successful'
 
         except socket.error , msg:
@@ -64,6 +67,7 @@ class sockets():
         #conn.send('Welcome to the server. Type something and hit enter\n')
         #send only takes string
 
+        print "Beginning Transfer"
 
         # init image array
         img_array = np.zeros( (60, 80), dtype = np.uint8)
@@ -76,6 +80,7 @@ class sockets():
         while True:
 
             #print "\n"
+
             image_str = conn.recv( 9840)
             #print "data_type: ", type(image_str)
             # CV2
@@ -162,6 +167,7 @@ class sockets():
             
             start_new_thread(self.client_thread ,( self.conn,))
 
+            print "thread started"
 
         ## in case of failure, close connection
         self.conn.close()
@@ -171,12 +177,31 @@ class sockets():
 
 if __name__ == '__main__':
 
-    ports = int ( raw_input("enter port: ") )
+    #ports = int ( raw_input("enter port: ") )
 
+    ## 37473
+    ## 37352  BB2
+    ## 37351  BB1
+    #11540  BB1
+    #11539  BB2
+    ports = int(sys.argv[1])
 
-    name = raw_input("enter save number: ")
-    test_day = '/trial_10_18_' + name + '/'
-    home_dir = '/media/phil/Backup_Drive_01/'
+    print ports
+    #name = raw_input("enter save number: ")
+    name = sys.argv[2]
+
+    date= datetime.datetime.now().date()
+
+    date = str(date)
+    print "Todays date: ", date
+    split = date.find("-", 5) ## assume 4 digit year
+
+    day = date[split+1::]
+    month =  date[5:split]
+
+    test_day = '/trial_' + month + '_' + day + '_' + name + '/'
+    print "trial: ", test_day
+    home_dir ='/mnt/USB/' ## '/media/philrep/Backup_Drive_01/' ##
     for i in range(1,3):
 
         path = home_dir + "Lepton_" + str(i) + '/binary' + test_day

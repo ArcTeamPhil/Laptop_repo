@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import numpy as np
 import cv2
 import os
@@ -5,20 +7,21 @@ from scipy import misc
 import time
 from matplotlib import pyplot as plt
 import matplotlib.animation as animation
-import exifread
+#import exifread
 
 
 class data_extract():
 
     def __init__(self, trials, diff):
 
+        os.chdir("/home/philrep")
         self.var_dict_ = {}
         self.var_dict_["trials"] = trials
-        self.var_dict_["data_path"] = '/media/phil/Backup_Drive_01'
+        self.var_dict_["data_path"] = ''
         self.var_dict_["win_dim"] = [350, 500]
         self.var_dict_["win_name"] = [None]*len(trials)*2
-        self.var_dict_["cam_folders"] = ['Lepton_1/imgs/', 'Lepton_2/imgs/']
-        self.var_dict_["bin_folders"] = ['Lepton_1/binary', 'Lepton_2/binary']
+        self.var_dict_["cam_folders"] = ['Lepton_1'] ##['Lepton_1/imgs/', 'Lepton_2/imgs/']
+        self.var_dict_["bin_folders"] = ['Lepton_1'] ## ['Lepton_1/binary', 'Lepton_2/binary']
         self.var_dict_["img_roi"] = [[34,39], [40, 34] ] ##[[27,45], [29,41]] ##[[22, 47], [21,43]]##  ##[ [42,38], [42,34]] ##] ## ] 
 
         
@@ -34,6 +37,11 @@ class data_extract():
         self.data_dict_["noise_0"] = np.zeros( (80*60/30), dtype = float)
         self.data_dict_["noise_1"] = np.zeros( (80*60/30), dtype = float)
 
+        self.data_dict_["0"] = np.zeros( (60,80), dtype=np.uint8)
+        self.data_dict_["0_color"] = np.zeros( (60,80,3), dtype=np.uint8)
+
+        self.data_dict_["1"] = np.zeros( (60,80), dtype=np.uint8)
+        self.data_dict_["1_color"] = np.zeros( (60,80,3), dtype=np.uint8)
 
         ## create windows for viewing images
         self.index = 0
@@ -101,8 +109,15 @@ class data_extract():
                 ## convert binary to unsigned 16 bit
                 array_16 = np.fromstring( image_str, np.uint16)
 
+                array_8 =  np.fromstring( image_str, np.uint16)
 
+                array_8 /= 2.0**8
 
+                array_8 = np.array(array_8, dtype=np.uint8)
+                #print "max: ", np.max(array_16)
+                array_8 = np.reshape(array_8, (60,82))
+
+                array_8 = array_8[:,2::]
                 ## preserve orgininal image contents 16 bit
                 self.data_dict_["img_"+str(self.index)] = np.reshape(array_16, (60,82) )
                 self.data_dict_["img_"+str(self.index)] = self.data_dict_["img_"+str(self.index)][:, 2::] 
@@ -147,8 +162,8 @@ class data_extract():
                     high_lim = 2**16-1
 
                 high_curve = np.where(array_16>high_lim)
-                print "high: ",len (high_curve[0])
-                print "low: ", len(low_curve[0])
+                ##print "high: ",len (high_curve[0])
+                ##print "low: ", len(low_curve[0])
                 ## create modified version of raw data
                 buffer = array_16
                 buffer = np.array(buffer, dtype=float)
@@ -164,7 +179,7 @@ class data_extract():
                 buffer[low_curve] = 0.0 #2.0**8
                 buffer[high_curve] = 255.0
 
-                print "bck grd intensity: ", low_lim, avg_bck_grd, high_lim 
+                ## print "bck grd intensity: ", low_lim, avg_bck_grd, high_lim 
 
 
                 #buffer[32*80]
@@ -177,7 +192,9 @@ class data_extract():
 
                 self.data_dict_[tag] = np.reshape( mask, (60,82) )
                 ## remove pre-info
-                self.data_dict_[tag] = self.data_dict_[tag][:, 2::]
+                self.data_dict_[tag] = self.data_dict_[tag][:, 2::] ###
+                self.data_dict_[str(self.index)] =np.array(array_8, dtype=np.uint8)##
+
 
 
 
@@ -213,7 +230,7 @@ class data_extract():
             intensity = np.sum(int_array)
             intensity /= max_div
 
-            print "obj intensity: ", intensity
+            ## print "obj intensity: ", intensity
 
             noise = self.data_dict_["img_"+str(self.index)]
             noise = np.reshape( noise, 80*60)
@@ -238,17 +255,22 @@ class data_extract():
         self.index = 0
         for cam in self.var_dict_["cam_folders"]:
             ## set the window location of images
-            cv2.moveWindow( self.var_dict_["win_name"][self.index], 700, 500*self.index )
+            #cv2.moveWindow( self.var_dict_["win_name"][self.index], 700, 500*self.index )
             ## set the window sizes
-            cv2.resizeWindow(self.var_dict_["win_name"][self.index],\
-                            self.var_dict_["win_dim"][1], self.var_dict_["win_dim"][0])
+            # cv2.resizeWindow(self.var_dict_["win_name"][self.index],  self.var_dict_["win_dim"][1], self.var_dict_["win_dim"][0])
             ## mark the dictionary to grab img from
             tag = "bin_img_" + str(self.index)
             ## grab dict and convert to unsigned int 8
             self.data_dict_[tag] = np.array ( self.data_dict_[tag], dtype = np.uint8)
             ## show the image
-            cv2.imshow(self.var_dict_["win_name"][self.index], self.data_dict_[tag])
-            print index
+            tag1 = str(self.index)
+            image = self.data_dict_[tag1]
+            # print "max: ", np.max(image)
+            #image = np.copy(self.data_dict_[tag])
+            image = cv2.applyColorMap(image, cv2.COLORMAP_JET)
+            cv2.imshow(self.var_dict_["win_name"][self.index], image)
+
+            self.data_dict_[str(self.index) + '_color'] = image
 
             ## end process
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -312,12 +334,15 @@ class data_extract():
         self.index = 0
         for cam in self.var_dict_["cam_folders"]:
 
-            tag = "image_" + str(self.index) +"_"+ str(index)
+            tag = "image_" + str(self.index) +"_"+ "%08d" % index
             prefix = save_fold + self.var_dict_["trials"][0]
             #np.savetxt(tag, self.data_dict_[tag])
             #f = open(prefix + "_" + tag, 'a')
             tag = prefix+"_"+tag+".png"
-            cv2.imwrite(tag, self.data_dict_["bin_img_"+str(self.index)])
+            ## print(os.getcwd())
+            print(tag)
+            #cv2.imwrite(tag, self.data_dict_["bin_img_"+str(self.index)])
+            cv2.imwrite(tag, self.data_dict_[str(self.index) + '_color'] )
             #np.savetxt( f, self.data_dict_[tag].reshape(1, self.data_dict_[tag].shape[0]), delimiter =','  )
             #f.close()
             self.index += 1
@@ -333,11 +358,21 @@ class data_extract():
 if __name__ == '__main__':
 
 
-    start = 0
-    end = 950
+    ## trial 2 is max 51593
+    ## 15000 window reflcetion
+    ## 18000 car
+    ## 19000 car approach
+    ## fridge 25000
+    ## 31000 car again parked
+    ## 34000 hot steam
+    ## 43300 Car sequence begins
+    ## 45500 car apssign
+    ##47400 pav
+    start = 46100 ## 19000 
+    end = 46500 ##19260 ##53000 
     diff = end - start
-    save_fold = "trial_data/"
-    trials = ['trial_10_18_0']
+    save_fold =  "Lepton_1/img_folder_3/" ##"trial_data/"
+    trials = ['trial_11_25_2']
     exe = data_extract(trials, end)
 
     for i in range(start, end):
@@ -345,10 +380,10 @@ if __name__ == '__main__':
         exe.load_bin(i)
         exe.proc_img(i)
         exe.view_img(i)
-        exe.view_int(i)
-        exe.save_int(i,save_fold)
-        exe.save_noise(i,save_fold)
-        ##exe.save_image(i,save_fold)
+        #exe.view_int(i)
+        #exe.save_int(i,save_fold)
+        #exe.save_noise(i,save_fold)
+        #exe.save_image(i,save_fold)
 
         
         
