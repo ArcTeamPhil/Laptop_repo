@@ -5,7 +5,7 @@ import cv2
 import os
 
 HOST = ''
-PORT = 11540 # Arbitrary non-privileged port
+PORT = 11540# Arbitrary non-privileged port
  
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'

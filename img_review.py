@@ -368,10 +368,10 @@ if __name__ == '__main__':
     ## 43300 Car sequence begins
     ## 45500 car apssign
     ##47400 pav
-    start = 46100 ## 19000 
-    end = 46500 ##19260 ##53000 
+    start = 14800 ## 19000 
+    end = 15150 ##19260 ##53000 
     diff = end - start
-    save_fold =  "Lepton_1/img_folder_3/" ##"trial_data/"
+    save_fold =  "Lepton_1/img_folder_6/" ##"trial_data/"
     trials = ['trial_11_25_2']
     exe = data_extract(trials, end)
 
@@ -383,7 +383,7 @@ if __name__ == '__main__':
         #exe.view_int(i)
         #exe.save_int(i,save_fold)
         #exe.save_noise(i,save_fold)
-        #exe.save_image(i,save_fold)
+        exe.save_image(i,save_fold)
 
         
         
