@@ -106,10 +106,66 @@ IR Thermometer (IRT)
 
 * [[http://ac.els-cdn.com/S003442579600123X/1-s2.0-S003442579600123X-main.pdf?_tid=e76aecf2-faf4-11e6-bf59-00000aacb361&acdnat=1487984224_10336d649a6a881b7156c62ceec13e7a][Emissivity measurements of several soils and vegetation types in the 8–14 μm wave band: analysis of two field methods.]]   
 ** emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived
+*** Background
+**** Radiation summation of refection and emission
+**** emissivity values in 10-12 um region higher than 8-14 um
+**** field measurements of emissivities of ground surfaces
+*** Methodology
+**** Box Method
+***** way of measeaurement of a sample
+***** specularly reflective sides (epsilon=0.03)
+***** different lids with small central hole to measure from
+**** Two-Lid Method
+***** hot lid --> rough anodized aluminum painted Parson's black --> perfect difusser (epsilon = 0.98)
+***** cold lid --> specularly reflective polished aluminum --> epsilon = 0.03
+***** three confidurations to measure radiance (L)
+****** sample in box with cold lid --> two minutes acclimation --> measurement taken (L1)
+****** once taken hot lid immediately switched with cold lid --> measeaurement taken (L2)
+****** hot lid on top, cold lid on bottom --> material in cold center --> measeaurement taken (L3)
+**** One-Lid Method
+****** cold lid on top
+****** no box at all 
+****** reverse sensor to look at sky
+*** Two Lid
+**** theoretical
+***** ideal --> epsilon_cold = 0, epsilon_hot = 1
+***** epsilon_0 = (L3-L1)/(L3-L2)
+***** epsilon_s = epsilon_0 + delta*epsilon (corrective factor)
+***** perfect diffuser + reflectors same for total energy integrated --> direction changes
+****** Lambertian walls would only allow half the incident to reach the top
+****** cold lid also assumed Lambertian (even with epsilon=0.03) bc all directions incident are equal from walls
+***** Assumes temp does not change during measurements
+***** only energy from surface, and energy reflected from surface
+***** only the base is directly measured through the through hole
+***** solve for corrective factor
+**** functional dependence of Emissivity
+***** box size changes Transference Factor
+****** F = 1 for infinitely large base area ( H/L=0)
+****** F = 0 for near zero base area (H/L >> 1)
+***** determine Tcold --> cold lid on bottom with small diffusive zone
+****** also could just thermocouple
+**** analysis of Sensitivity
+***** primary --> sensitivity of radiometer
 
-* [[emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived][Determining the emissivity of the leaves of nine horticultural crops by means of infrared thermography]]
+* [[emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived][Determining the emissivity of the leaves of nine horticultural crops by means of infrared thermograpy]]
 ** hermographic camera was used for both qualitative and quantitative emissivity measurement by evaluating radiation emission from the leaves
 
+* [[http://www.sciencedirect.com/science/article/pii/S0034425707000454][Spectral reflectance and emissivity features of broad leaf plants: Prospects for remote sensing in the thermal infrared (8.0–14.0 μm)]]
+** "he data show, for the first time, that it is possible to discriminate subtle spectral emissivity features of leaves from the natural background emission."
+*** Intro
+**** "directional hemispherical reflectance (DHR) " --> unique spectra for each species
+***** Used for calculating emissivity --> need to look at surface and volume scatter effects
+****** results of both are opposite in sign
+**** "attenuated total reflectance (ATR) " --> discern aspects of the cutiles and cell walls
+***** provide measurements  similar to transmission measurements, avoid scatter problems
+****** "ATR involves a surface evanescent wave that penetrates to only a few microns depth"
+*** Methods
+**** ATR wavelength span 2.5-15.38 um (4000 - 650 cm-1 freq) at 4 cm-1 resolution
+**** DHR used integrating sphere --> internal reflectance 0.96 --> wavelength span 2.5 - 14 um
+***** referenced against clean, crinkled aluminum (reduced specular characteristics), reflectance = 0.93
+**** measurements completed in 10 min total, 0.1 C temp drift
+
+* Other
 
 * Infrared Issues:
 ** background radiation
