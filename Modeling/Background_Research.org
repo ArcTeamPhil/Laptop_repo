@@ -1,6 +1,10 @@
 
+IR Thermometer (IRT)
 * [[http://www.mdpi.com/1424-8220/15/5/11387/htm][Determining the Leaf Emissivity of Three Crops by Infrared Thermometer]] 
 ** infrared thermometer + thermocouple wirE, simple and novel technique was developed to determine the emissivities of leaves for three horticultural crops using an infrared thermometer.
+** Test guesses for emissivity by assuming constant distrubition of temp across plant
+** Integrating across all wavelengths
+** epsilon = 0.9809, 0.9783, 0.981, 0.9848 for Phalaenopsis mature and new leaves and Paphiopedilum and Malabar chestnut leaves
 *** Experimental section
 **** total rad = object + reflections + transmission
 ***** transmission isgnored
@@ -18,8 +22,28 @@
 
 * [[http://hortsci.ashspublications.org/content/25/12/1535.full.pdf][Measuring Plant Stress with an Infrared Thermometer]]
 ** portable infrared thermometer to measure foliage temperature and calculate a crop water stress index (CWSI)
+*** theory:
+**** biological emissivity 0.9-0.99 in 105-12.5 um band, plants 0.97-0.99
+**** shade for 20-30 sec changes temp significantly
+**** compare T_foliage to T_air
+***** look for transpiration loss, compare to well watered plant response
+****** humid environments skew results negatively
+*** "Recently,  foliage  temperatures  have  been  related  to  the  temperature  response  of  the  enzymes  within  the  plant.  Burke  and  Hatfield (1987)  showed  that  it  was  necessary  to  consider  the  foliage  temperature-enzyme  activity  relationship  to  fully  quantify  the  protection  level  of  glutathione  reductase  in  field-grown  wheat"
+**** while night --> plant == air temp --> day --> temps good for enzyme function --> temp increase
+***** dependednt on : soil water availability, net radiation, air temperatures
+***** temp differences: 23-32 C (cotton), 10-17 C (spinach), 30-40 C (cucumber) between ait to plant
+***** more variability as soil water decreased
+***** flowers --> no transipration --> 5 C higher
+
+IR Camera
 * [[https://academic.oup.com/jxb/article/53/378/2249/426550/Use-of-infrared-thermography-for-monitoring][Use of infrared thermography for monitoring stomatal closure in the field: application to grapevine]]
 ** method of monitoring stomatal closure of grapevines in the field with infrared thermography
+*** wet and dry reference surfaces to eliminate non-leaves
+**** Background:
+***** Crop Water Stress Index CWSI --> determiine underwatered crops
+****** issues: not useful in humid climates
+****** if too broad, included non vegetation in measeaurement (soil)
+
 * [[https://academic.oup.com/jxb/article/55/401/1423/478977/Combining-thermal-and-visible-imagery-for][Combining thermal and visible imagery for estimating canopy temperature and identifying plant stress]]
 ** measured the temperature distribution of sunlit and shaded leaf area of Vinifera canopies, and then compared the effects of irrigation treatments
 
@@ -35,3 +59,5 @@
 ** values for the emissivity
 ** calibration of the infrared thermometer 
 *** [[https://dl.sciencesocieties.org/publications/aj/pdfs/58/6/AJ0580060597][Infrared Thermometry of Vegetation]]
+*** blackbody target incremented 0-50 C for calibration
+**** blackbody cones in controlled water baths
