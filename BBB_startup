@@ -1,9 +1,0 @@
-#!/bin/bash
-clear
-echo "starting up"
-echo "turning on SPI"
-
-echo BB-SPI0-01 > /sys/devices/bone_capemgr.9/slots
-
-cd ./Lepton_Data_Sender/src/
-
