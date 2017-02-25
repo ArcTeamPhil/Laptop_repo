@@ -1,0 +1,37 @@
+
+* [[http://www.mdpi.com/1424-8220/15/5/11387/htm][Determining the Leaf Emissivity of Three Crops by Infrared Thermometer]] 
+** infrared thermometer + thermocouple wirE, simple and novel technique was developed to determine the emissivities of leaves for three horticultural crops using an infrared thermometer.
+*** Experimental section
+**** total rad = object + reflections + transmission
+***** transmission isgnored
+***** R_t = epsilon * alpha * T^4_leaf + (1 - epsilon) * alpha * T^4_ref_bckgnd [W/m-2]
+***** E_ircam = epsiloThe target temperature for calibration was maintained at 10, 15, 20, 25, 30, 35 and 40 °C n_ircam * T^4_ircam_detected + E_error    (IR camera)
+***** E_thermo = epsilon_thermo * T^4_thermo   (thermocouple)
+***** assum E_ircam == E_thermo
+***** assume epsilon_thermo = epsilon_ircam
+**** Thermometers
+***** The target temperature for calibration was maintained at 10, 15, 20, 25, 30, 35 and 40 deg C 
+**** Measurement:
+***** Done at Night for min radiation
+***** thermocouple attached with permeable tape
+***** measurements taken with syncronized thermocouple + IR
+
+* [[http://hortsci.ashspublications.org/content/25/12/1535.full.pdf][Measuring Plant Stress with an Infrared Thermometer]]
+** portable infrared thermometer to measure foliage temperature and calculate a crop water stress index (CWSI)
+* [[https://academic.oup.com/jxb/article/53/378/2249/426550/Use-of-infrared-thermography-for-monitoring][Use of infrared thermography for monitoring stomatal closure in the field: application to grapevine]]
+** method of monitoring stomatal closure of grapevines in the field with infrared thermography
+* [[https://academic.oup.com/jxb/article/55/401/1423/478977/Combining-thermal-and-visible-imagery-for][Combining thermal and visible imagery for estimating canopy temperature and identifying plant stress]]
+** measured the temperature distribution of sunlit and shaded leaf area of Vinifera canopies, and then compared the effects of irrigation treatments
+
+* [[http://ac.els-cdn.com/S003442579600123X/1-s2.0-S003442579600123X-main.pdf?_tid=e76aecf2-faf4-11e6-bf59-00000aacb361&acdnat=1487984224_10336d649a6a881b7156c62ceec13e7a][Emissivity measurements of several soils and vegetation types in the 8–14 μm wave band: analysis of two field methods.]]   
+** emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived
+
+* [[emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived][Determining the emissivity of the leaves of nine horticultural crops by means of infrared thermography]]
+** hermographic camera was used for both qualitative and quantitative emissivity measurement by evaluating radiation emission from the leaves
+
+
+* Infrared Issues:
+** background radiation
+** values for the emissivity
+** calibration of the infrared thermometer 
+*** [[https://dl.sciencesocieties.org/publications/aj/pdfs/58/6/AJ0580060597][Infrared Thermometry of Vegetation]]
