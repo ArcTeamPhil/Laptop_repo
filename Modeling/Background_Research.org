@@ -43,6 +43,23 @@ IR Camera
 ***** Crop Water Stress Index CWSI --> determiine underwatered crops
 ****** issues: not useful in humid climates
 ****** if too broad, included non vegetation in measeaurement (soil)
+***** Reference Surfaces allows for scaling of test for current conditions
+****** assumes model and reference are similar
+****** use wet or petroleum covered leaves for ensuring equivalent radioactive properties
+***** "variation in temperature could be a more sensitive measure of mean leaf conductance than was mean temperature itself."
+***** variation increases as stomata close
+**** Imaging
+***** "The background temperature required for calculation of object temperatures was estimated as the radiative temperature of a crumpled aluminium foil sheet placed in as similar as possible a position as the object being viewed, with emissivity set at 1.0; emissivity was set at 0.95 for viewing leaves."
+***** subtracted correction by imagin with lens cap on at intervals during testing
+**** Results
+***** filter paper (wet/dry), leaves (wet/dry) 
+****** set upper and lower bounds to image analysis
+***** avg temps + freq distrubution of temps over area
+***** greater variance for plants in sunlight 25% - 42% and with larger pixels
+**** Illumination
+***** "The sensitivity of Tleaf to changes in stomatal conductance, and hence the utility of thermal imaging for the study of stomatal conductance, depends both on the absorbed radiation and on the boundary layer conductance and atmospheric humidity."
+***** sunlit leaves better for stomatal conductance
+***** reference objects experienced high variance from small size and changing level of wetness
 
 * [[https://academic.oup.com/jxb/article/55/401/1423/478977/Combining-thermal-and-visible-imagery-for][Combining thermal and visible imagery for estimating canopy temperature and identifying plant stress]]
 ** measured the temperature distribution of sunlit and shaded leaf area of Vinifera canopies, and then compared the effects of irrigation treatments
