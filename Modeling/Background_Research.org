@@ -163,7 +163,54 @@ IR Thermometer (IRT)
 **** ATR wavelength span 2.5-15.38 um (4000 - 650 cm-1 freq) at 4 cm-1 resolution
 **** DHR used integrating sphere --> internal reflectance 0.96 --> wavelength span 2.5 - 14 um
 ***** referenced against clean, crinkled aluminum (reduced specular characteristics), reflectance = 0.93
-**** measurements completed in 10 min total, 0.1 C temp drift
+**** measurements completed in 10 min total, 0.1 C temp drift, low humidity, clear sky
+***** spectral radiance calibrated with blackbodies at 10C and 40C
+***** horizontal --> detached leaves carpeted FOV of spectrometer for uniform surface of leaves
+****** once taken, high relfectivity plate put on top, to relfect downwelling radiance for measurement
+***** in situ --> measurements of leave on branches
+****** plate then placed directly beneath spectrometer
+**** relfected solar energy and upwelling atmospheric path between sensor and object ignored
+***** L_lambda = epsilon * L_BB + (1 - epsilon) * L_DWR
+**** DHR Sequence:
+***** 1.) T_s is sample temp (T_s, unknown) near abmient temp and used to normalize against Plank function (Black body approx)
+***** 2.) Repeat for multiple BB temps
+***** 3.) Check if trial temp > actual sample temp --> relfected downwelling radiance overcorrected --> residual features are opposite to those in the actual downwelling rad
+***** 4.) iterate until residuals minimized
+**** ATR In situ SEquence:
+***** scale factor applied to downwelling radiance data
+***** epsilon = (L - x * L_DWR ) / ( L_BB - x * L_DWR )
+***** downwelling captured with aluminum covered panel --> not accurate --> x < 1.0 (0.9 better)
+*** Results
+**** Absorbtion 9.48 um, 9.70 um:
+***** ATR: strong 
+***** DHR: less prominent
+****** two reflectence maxima --> surface scattering 
+**** Absorbtion 8.61 um, 9.03 um:
+***** ATR: moderate
+***** DHR: moderate
+****** surface scattering
+**** Absorbtion 11.15 um:
+***** ATR: weak
+***** DHR: major reflectance minimum
+****** volume scatter
+**** DHR:
+***** thickness of cellulose --> volume and/or surface scatter
+**** Xylan (hemicellulose)
+***** "Hemicelluloses are polysaccharides that form part of the matrix surrounding cellulose fibers of cell walls"
+***** ATR spectrum xylan --> DHR spectrum Z. mays leaves --> mirror image (9.62 um)
+****** strong surface scatter related to leaves with abundant xylan
+**** Cutin
+***** appears at 8.59, 9.07, 12.01, and 13.89 um
+**** Silica
+***** appears at 9.08, 12.36 um
+**** Oleanolic Acid (terpenes)
+***** broad class in several species
+***** appears at 9.69, 10.03 um
+**** Surface Effects
+***** texture of waxes on upper and lower surfaces --> adaxial = smooth --> abaxial = cavities
+***** difference of up to 4% reflectance
+
+
 
 * Other
 
