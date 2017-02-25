@@ -35,7 +35,9 @@ IR Thermometer (IRT)
 ***** more variability as soil water decreased
 ***** flowers --> no transipration --> 5 C higher
 
-IR Camera
+
+
+* IR Camera
 * [[https://academic.oup.com/jxb/article/53/378/2249/426550/Use-of-infrared-thermography-for-monitoring][Use of infrared thermography for monitoring stomatal closure in the field: application to grapevine]]
 ** method of monitoring stomatal closure of grapevines in the field with infrared thermography
 *** wet and dry reference surfaces to eliminate non-leaves
@@ -60,9 +62,47 @@ IR Camera
 ***** "The sensitivity of Tleaf to changes in stomatal conductance, and hence the utility of thermal imaging for the study of stomatal conductance, depends both on the absorbed radiation and on the boundary layer conductance and atmospheric humidity."
 ***** sunlit leaves better for stomatal conductance
 ***** reference objects experienced high variance from small size and changing level of wetness
+**** Energy Balance:
+***** Temp Air-leaf
+***** stomatal resistance --> leaf resistance to water vapour transfer
+***** boundary layer resistance to water vapour
+***** net isothermal radiation
+***** air water vapour pressure deficit 
+***** parallel resistance to heat and radaiative transfer
+***** psychrometric constant
+***** density of air
+***** specific heat capascity of air
+***** slope realtion saturation vapour pressure to temperatures
+**** Atmospheric environment on canopy temperatures
+***** slight variance in minute intervals
+***** fluctuating reference leads to errors in results
+**** Temp, water status, stress indices, stomatal conductance
+***** difference in variation throughout day
+***** treatments --> No irrigation, 100% ETC, 50% ETC 
+***** "Much more surprising, however, was the observation that there were similar, or even stronger, highly consistent and significant treatment effects on both the reference temperatures (Tdry and Twet). "
+***** Higher temps for No water and dry reference than for the 100% ETC or dry reference
+***** reference materials AFFECTED by microclimate surounding the plants
+****** No water may raise local temperature, soil heating
+**** COnclusion
+***** real leaves with water or petroleum jelly to stop transpiration
 
 * [[https://academic.oup.com/jxb/article/55/401/1423/478977/Combining-thermal-and-visible-imagery-for][Combining thermal and visible imagery for estimating canopy temperature and identifying plant stress]]
 ** measured the temperature distribution of sunlit and shaded leaf area of Vinifera canopies, and then compared the effects of irrigation treatments
+*** "The present method provides two major improvements compared with earlier methods for calculating thermal indices. First, it allows more accurate estimation of the indices, which are consequently more closely related to stomatal conductance. Second, it gives more accurate estimates of the temperature distribution of the shaded and sunlit parts of canopy, and, unlike the earlier methods, makes it possible to quantify the relationship between temperature variation and stomatal conductance."
+*** Intro
+**** evaporation, radiation, windspeed, air temperatures, air humidity all affect canopy temp
+**** dry leaf --> no transipration surface (petroleum), wet leaf --> maximum transipration
+**** treatments --> no water 2 day, no water 1 day, full water
+*** measurements
+**** stomatal conductance using porometer
+**** (global and photosynthetically active radiation, air temperature, and relative humidity
+*** Imaging
+**** 8-12 um
+**** NIR
+**** Visible
+*** Processing
+**** background correction from lens cap imaging
+**** supervised classification of plant vs not plant, sunlight vs shade
 
 * [[http://ac.els-cdn.com/S003442579600123X/1-s2.0-S003442579600123X-main.pdf?_tid=e76aecf2-faf4-11e6-bf59-00000aacb361&acdnat=1487984224_10336d649a6a881b7156c62ceec13e7a][Emissivity measurements of several soils and vegetation types in the 8–14 μm wave band: analysis of two field methods.]]   
 ** emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived
