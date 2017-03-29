@@ -10,8 +10,8 @@ class temp():
 
     def __init__(self):
 
-        self.headers = [ "Index", "Day", "Date", "Temp 1", "Junk", "Temp 2"]
-        self.headers = [ "Temp 1","Temp 2"]
+        self.headers = [ " Index", " Day", " Date", " Temp 1", " Junk", " Temp 2"]
+        # self.headers = [ " Temp 1"," Temp 2"]
 
         self.temps_ = {}
 
@@ -20,10 +20,11 @@ class temp():
 
 
         ## look for the excel file (assumes only one in directory)
+        os.chdir("/home/philrep/Laptop_repo/greenhouse_exp/")
         for file in os.listdir(os.getcwd()):
-            if file.endswith("2_24.csv"):
+            if file.endswith("data_3_2.csv"):
                 ## load the file
-                data_df = pandas.read_csv(file, skip_blank_lines=True)
+                data_df = pandas.read_csv(file, skip_blank_lines=True,index_col=0, names=self.headers)
 
                 ## drop NaN
                 data_df.dropna(how='all', inplace=True)
@@ -33,13 +34,15 @@ class temp():
                 for column in data_df.columns:
                     print("column: ", column)
 
+                    print("str: ", data_df[column][0:4])
                     ## checks for match against user defined headers
                     if str(column) in self.headers:
                         ## adds the column contens to the dict ## 196609 is null
                         # self.temps_[column].replace('', np.NAN , inplace=True)
                         # self.temps_[column] = self.temps_[column][pandas.notnull(self.temps_[column])]
 
-                        self.temps_[column] = np.array( (data_df[column][0:296719]), dtype = float)
+                        ## 0:296719
+                        self.temps_[column] = np.array( (data_df[column][2:4]), dtype = float)
                         print( self.temps_[column])
                         # not_blank = self.temps_[column] != ''
 
@@ -51,6 +54,10 @@ class temp():
                         #     self.temps_[column] = float(self.temps_[column])
 
     def norm(self):
+
+        print("keys")
+        for keys in self.temps_.iterkeys():
+            print keys
 
         self.temps_["norm"] = self.temps_["Temp 1"] - self.temps_["Temp 2"]
 

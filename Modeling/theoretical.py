@@ -32,7 +32,7 @@ class theory():
         self.b = 2900  ## um * K constant of proportionality
         # self.emis = np.array( (0.98, 0.75, 0.5, 0.1) )
 
-        self.emis = np.array( (1.01, 1.00, 0.99, 0.98, 0.97, 0.96, 0.95) )
+        self.emis = np.array( (1.00, 0.99, 0.98, 0.97, 0.96, 0.95, 0.50, 0.25, 0.05) )
 
         ## for blackbody confirmation check
         # self.emis = np.array( (1.0 ,1.0) )

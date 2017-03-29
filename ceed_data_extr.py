@@ -31,7 +31,7 @@ class data():
 
         ## look for the excel file (assumes only one in directory)
         for file in os.listdir(os.getcwd()):
-            if file.endswith(".csv"):
+            if file.endswith("52.csv"):
                 ## load the file
                 data_df = pandas.read_csv(file)
 

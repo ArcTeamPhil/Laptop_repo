@@ -210,7 +210,44 @@ IR Thermometer (IRT)
 ***** texture of waxes on upper and lower surfaces --> adaxial = smooth --> abaxial = cavities
 ***** difference of up to 4% reflectance
 
-
+* Energy Balance
+** Transpiration
+*** lambaE = R_n - G - H --> amount of energy aabsorbed during the conversion of liquid water to vapor
+**** lambdaE: phase change energy (out of the plant)
+**** R_n: net radiation (into the plant)
+**** G: soil heat flux (into the ground)
+**** H: sensible heat flux --> H = mc\delta{T} --> directly affects the temperature (out of plant)
+******* https://en.wikipedia.org/wiki/Evapotranspiration
+******* https://en.wikipedia.org/wiki/METRIC
+*** boundary layer of air along surface of leaf, water vapor must cross this boundary.
+**** moving air == faster transpiration
+**** layer increases with leaf size --> decrease in transpiration
+**** warm, dry, windy air causes higher transpiration
+**** sunlight (even small) casues higher also
+***** wet leaf has no transpiration
+***** IGORES METABOLIC
+******* http://passel.unl.edu/pages/informationmodule.php?idinformationmodule=1092853841&topicorder=6
+*** Porometry --> chamber enclosing leaves to measure humidity increase
+** Daltons LAw
+*** he rate of evaporation is proportional to the difference between the stauration vapour pressure at the water temperature, e_s and the actual vapour pressure in the air e_a
+**** E = K(e_S-e_a) --> rate of evaporation 
+***** e_s: saturation vapour pressure of air
+***** e_a: actual vapour pressure of air
+*** Energy Budget
+**** E = ( Hn - Hg - Hs - Hi ) / (delta * L(1 + Beta) )
+***** Hn: net heat energy recieved by water surface --> Hn = Hc(1-r) - Hb
+***** Hc(1-r): incoming solar radiation into a surface of reflection coefficient, r
+***** Hb: back radiation from water body
+***** Hg: heat flux into the ground
+***** Hs: heat stored in water body
+***** Hi: net heat conducted out of the system by water flow
+***** Beta: Bowen's ratio --> ratio of sensible to latent heat
+***** Delta: density of water
+***** L: Latent heat of evaporation
+******* https://gradeup.co/evaporation-transpiration-and-stream-flow-measurement-i-978c41c5-8170-11e6-90ce-d2449cc97707
+******* http://swhydro.arizona.edu/archive/V7_N1/feature3.pdf
+** Latent Heat
+******* http://plantsinaction.science.uq.edu.au/edition1/?q=content/14-5-4-latent-heat-transfer
 
 * Other
 
