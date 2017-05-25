@@ -1,6 +1,6 @@
 
 IR Thermometer (IRT)
-* [[http://www.mdpi.com/1424-8220/15/5/11387/htm][Determining the Leaf Emissivity of Three Crops by Infrared Thermometer]] 
+* [[http://www.mdpi.com/1424-8220/15/5/11387/htm][Determining the Leaf Emissivity of Three Crops by Infrared Thermometer]]
 ** infrared thermometer + thermocouple wirE, simple and novel technique was developed to determine the emissivities of leaves for three horticultural crops using an infrared thermometer.
 ** Test guesses for emissivity by assuming constant distrubition of temp across plant
 ** Integrating across all wavelengths
@@ -14,7 +14,7 @@ IR Thermometer (IRT)
 ***** assum E_ircam == E_thermo
 ***** assume epsilon_thermo = epsilon_ircam
 **** Thermometers
-***** The target temperature for calibration was maintained at 10, 15, 20, 25, 30, 35 and 40 deg C 
+***** The target temperature for calibration was maintained at 10, 15, 20, 25, 30, 35 and 40 deg C
 **** Measurement:
 ***** Done at Night for min radiation
 ***** thermocouple attached with permeable tape
@@ -54,7 +54,7 @@ IR Thermometer (IRT)
 ***** "The background temperature required for calculation of object temperatures was estimated as the radiative temperature of a crumpled aluminium foil sheet placed in as similar as possible a position as the object being viewed, with emissivity set at 1.0; emissivity was set at 0.95 for viewing leaves."
 ***** subtracted correction by imagin with lens cap on at intervals during testing
 **** Results
-***** filter paper (wet/dry), leaves (wet/dry) 
+***** filter paper (wet/dry), leaves (wet/dry)
 ****** set upper and lower bounds to image analysis
 ***** avg temps + freq distrubution of temps over area
 ***** greater variance for plants in sunlight 25% - 42% and with larger pixels
@@ -67,7 +67,7 @@ IR Thermometer (IRT)
 ***** stomatal resistance --> leaf resistance to water vapour transfer
 ***** boundary layer resistance to water vapour
 ***** net isothermal radiation
-***** air water vapour pressure deficit 
+***** air water vapour pressure deficit
 ***** parallel resistance to heat and radaiative transfer
 ***** psychrometric constant
 ***** density of air
@@ -78,7 +78,7 @@ IR Thermometer (IRT)
 ***** fluctuating reference leads to errors in results
 **** Temp, water status, stress indices, stomatal conductance
 ***** difference in variation throughout day
-***** treatments --> No irrigation, 100% ETC, 50% ETC 
+***** treatments --> No irrigation, 100% ETC, 50% ETC
 ***** "Much more surprising, however, was the observation that there were similar, or even stronger, highly consistent and significant treatment effects on both the reference temperatures (Tdry and Twet). "
 ***** Higher temps for No water and dry reference than for the 100% ETC or dry reference
 ***** reference materials AFFECTED by microclimate surounding the plants
@@ -104,7 +104,7 @@ IR Thermometer (IRT)
 **** background correction from lens cap imaging
 **** supervised classification of plant vs not plant, sunlight vs shade
 
-* [[http://ac.els-cdn.com/S003442579600123X/1-s2.0-S003442579600123X-main.pdf?_tid=e76aecf2-faf4-11e6-bf59-00000aacb361&acdnat=1487984224_10336d649a6a881b7156c62ceec13e7a][Emissivity measurements of several soils and vegetation types in the 8–14 μm wave band: analysis of two field methods.]]   
+* [[http://ac.els-cdn.com/S003442579600123X/1-s2.0-S003442579600123X-main.pdf?_tid=e76aecf2-faf4-11e6-bf59-00000aacb361&acdnat=1487984224_10336d649a6a881b7156c62ceec13e7a][Emissivity measurements of several soils and vegetation types in the 8–14 μm wave band: analysis of two field methods.]]
 ** emissivities for the Landsat Thematic Mapper band 6 and NOAA Advanced Very High Resolution Radiometer channels 4 and 5 have been derived
 *** Background
 **** Radiation summation of refection and emission
@@ -124,7 +124,7 @@ IR Thermometer (IRT)
 ****** hot lid on top, cold lid on bottom --> material in cold center --> measeaurement taken (L3)
 **** One-Lid Method
 ****** cold lid on top
-****** no box at all 
+****** no box at all
 ****** reverse sensor to look at sky
 *** Two Lid
 **** theoretical
@@ -182,9 +182,9 @@ IR Thermometer (IRT)
 ***** downwelling captured with aluminum covered panel --> not accurate --> x < 1.0 (0.9 better)
 *** Results
 **** Absorbtion 9.48 um, 9.70 um:
-***** ATR: strong 
+***** ATR: strong
 ***** DHR: less prominent
-****** two reflectence maxima --> surface scattering 
+****** two reflectence maxima --> surface scattering
 **** Absorbtion 8.61 um, 9.03 um:
 ***** ATR: moderate
 ***** DHR: moderate
@@ -230,7 +230,7 @@ IR Thermometer (IRT)
 *** Porometry --> chamber enclosing leaves to measure humidity increase
 ** Daltons LAw
 *** he rate of evaporation is proportional to the difference between the stauration vapour pressure at the water temperature, e_s and the actual vapour pressure in the air e_a
-**** E = K(e_S-e_a) --> rate of evaporation 
+**** E = K(e_S-e_a) --> rate of evaporation
 ***** e_s: saturation vapour pressure of air
 ***** e_a: actual vapour pressure of air
 *** Energy Budget
@@ -247,14 +247,55 @@ IR Thermometer (IRT)
 ******* https://gradeup.co/evaporation-transpiration-and-stream-flow-measurement-i-978c41c5-8170-11e6-90ce-d2449cc97707
 ******* http://swhydro.arizona.edu/archive/V7_N1/feature3.pdf
 ** Latent Heat
-******* http://plantsinaction.science.uq.edu.au/edition1/?q=content/14-5-4-latent-heat-transfer
+******* http://plantsinaction.science.uq.edu.au/edition1/?q=content/14-5-plant-heat-budgets
+*** "When solar radiation strikes a leaf (Figure 14.18), some is reflected, some is absorbed and some is transmitted. Absorbed energy is subsequently dissipated via three main avenues: reradiation of long wavelengths to nearby surfaces and sky; conduction and convection of sensible heat (directly measurable or able to be ‘sensed’); and latent heat exchange (energy consumed to evaporate water and commonly referred to as transpirational cooling)."
+**** Reflection
+***** Maimum in NIR (0.75-1.0 um) due to thick cuticle or dense pubescence (most 25% reflectance)
+**** Sensible Heat
+***** conduction with surrounding air through boundary layer. Relationship of leaf size and air speed
+**** Latent Heat
+***** partial pressure differences in plant internal and ambient. internal is saturation vapour pressure, outside ity
 
+** Simultaneous Determination of sensible and latent heat transfer
+******* http://download.springer.com/static/pdf/639/art%253A10.1007%252FBF02166806.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Farticle%2F10.1007%2FBF02166806&token2=exp=1495216900~acl=%2Fstatic%2Fpdf%2F639%2Fart%25253A10.1007%25252FBF02166806.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Farticle%252F10.1007%252FBF02166806*~hmac=ac6c27b7c2d3c9412674cd5ac7f73d57fb2c04208fd0c91a2a9a76061878303c
+
+* Links to investigate
+*** http://sfrc.ufl.edu/facultysites/martin/pubs/Martin%20et%20al%201999.pdf
+*** http://nature.berkeley.edu/ahg/pubs/Energy2.pdf
+*** https://link.springer.com/article/10.1007/BF02166806
 * Other
+
+** Modeling Plant energy exchange
+******* http://soils.wisc.edu/facstaff/wayne/cupid/outline.html#rbound
 
 * Infrared Issues:
 ** background radiation
 ** values for the emissivity
-** calibration of the infrared thermometer 
+** calibration of the infrared thermometer
 *** [[https://dl.sciencesocieties.org/publications/aj/pdfs/58/6/AJ0580060597][Infrared Thermometry of Vegetation]]
 *** blackbody target incremented 0-50 C for calibration
 **** blackbody cones in controlled water baths
+
+* Plant Motion
+** Vines --> Wikipedia: https://en.wikipedia.org/wiki/Climbing_plant#cite_note-12
+*** "It has also been suggested that twining vines revolving growth is mediated by changes in turgor pressure mediated by volume changes in the epidermal cells of the bending zone"
+** Nutation --> Wikipedia: https://en.wikipedia.org/wiki/Nutation_in_plants
+*** "Nutation is the bending movements executed by some plant organs, such as stems, leaves, roots, etc., by which the part is inclined successively in various directions"
+*** Circiular motion "..in contrast to variation movements or movements produced by reversible turgor changes."
+**** Turgor Pressure --> Wikipedia https://en.wikipedia.org/wiki/Turgor_pressure
+***** "turgor pressure is caused by the osmotic flow of water and occurs in plants, fungi, and bacteria."
+***** "Turgor pressure within cells is regulated by osmosis and also causes the cell wall to expand during growth. Along with size, rigidity of the cell is also caused by turgor pressure; a lower pressure results in a wilted cell or plant structure (i.e. leaf, stalk)"
+** Plant movemnt: http://www.abc.net.au/science/articles/2010/09/30/3025894.htm
+*** Phototropism: "If light is coming from the right, auxin gets sent down the left (shady) side of the shoot. That makes the cells on the shady side grow longer, putting a kink in the shoot so it points to the light. "
+*** "t's this combination of wilting and swelling in different parts of the plant that act as levers and create movement, much like the extension and contraction of opposite muscles in our bodies that gets our limbs jumping. "
+*** "And the driver for these movements is a tiny organ called the pulvinus that sits at the base of leaves and stems that fold. "
+** Circumnutation  in Phaseolus vulgaris. I.  Growth,  osmotic  potential and  cell ultrastructure  in  the  free-moving  part  of  the  shoot : http://onlinelibrary.wiley.com/doi/10.1111/j.1399-3054.1988.tb06634.x/pdf
+*** Nutation only possible with cell growth and cell elongation
+*** osmotic potential of ~70mOsm between convex/concave side of vine
+*** "During  every revolution,  each  cell  alternately swelled  and shrunk.  When turgor pressure was high, the deposits on the microfibril  would  be dense, when  turgor pressure was low they would be thin"
+*** " As  mentioned  above,  24  h  were  necessary  for  the displacement  upwards  of  the  bending  zone.  Since  the period  of  the  movement  was 90 min  (at  25°C) the  shoot completed  16 revolutions  in that time span. Thus in 24 h one  cell  was  16 times  in  the  convex  generatrix,  that  is it was very  turgid  16 times.  The  same  cell  was  also  in  the concave  generatrix  16 times,  that  is,  much  less  turgid. Thus,  in the bending zone, cells inflated  and deflated  16 times  a day."
+** Heat Generation in Plants: http://www.plantphysiol.org/content/114/4/1137.full.pdf
+** Overview of climbing plants: http://www.amjbot.org/content/96/7/1205.full.pdf+html
+** Plant metabolism: http://www.biology-online.org/11/9_plant_metabolism.htm
+*** Photosynthesis --> carbon + water + light energy == glucose + oxygen + water
+**** two sucessive processes --> light reaction + carbon-fixing reactio

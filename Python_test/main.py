@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import numpy as np
+
 
 class master_class():
     """Import classes which call functions"""
@@ -9,7 +11,7 @@ class master_class():
         self.var = 33
 
     def __str__(self):
-        return'('+str(self.name)+')'
+        return '(' + str(self.name) + ')'
 
     def init_nodes(self):
 
@@ -28,7 +30,6 @@ class master_class():
         # self.exe2 = class_2()
         # self.exe2.name = self.name
 
-
     def launch_nodes(self):
 
         ## change the class 1 name
@@ -42,26 +43,17 @@ class master_class():
 
         print("master self.var: ", self.var)
 
-
         print
 
         # print("class 2: ", self.exe2.name)
         # self.exe2.call_func_1()
         # self.exe2.call_func_2()
 
-
     def init_class_1(self):
         from class_file import class_1
 
 
-
-
-
-
 if __name__ == "__main__":
-
-
-
 
     ################### call master class
     exe = master_class()
@@ -90,7 +82,6 @@ if __name__ == "__main__":
     # exe2 = class_2()
     # print("class 2: ", exe2.name)
     # exe2.call_func_1()
-
 
     print
 
