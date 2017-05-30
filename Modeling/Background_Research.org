@@ -299,3 +299,17 @@ IR Thermometer (IRT)
 ** Plant metabolism: http://www.biology-online.org/11/9_plant_metabolism.htm
 *** Photosynthesis --> carbon + water + light energy == glucose + oxygen + water
 **** two sucessive processes --> light reaction + carbon-fixing reactio
+*** Respiration --> glusoce + enzymes == ethyl alcohol + carbon dioxide + ATP 2
+
+* Jerzy
+** Biologially Inspired vine-Like and Tendril-Like Robots: http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7237221
+** Tendril-Based Climbing Plants to Model, Simulate and Create Bio-Inspired Robotic Systems: http://www.sciencedirect.com/science/article/pii/S1672652914601177
+** Microtubules, MAPS and plant directional cell expansion: https://www.researchgate.net/profile/John_Sedbrook/publication/5384840_Microtubules_MAPs_and_plant_directional_cell_expansion/links/565ef50d08ae4988a7bd9224.pdf
+** Passonionfruit: https://www.hort.purdue.edu/newcrop/morton/passionfruit.html
+** The global trend in plant twining direction: http://onlinelibrary.wiley.com/doi/10.1111/j.1466-8238.2007.00326.x/full
+** Development at a Glance Phyllotaxis: http://dev.biologists.org/content/140/2/249.short
+** Gelatinous fibers are widespread in coiling tendrils and twining vines: http://www.amjbot.org/content/96/4/719.full.pdf&sa=U&ei=FR9rU8ywDePJ8wHJ-4Ew&ved=0CBsQFjAA&usg=AFQjCNE9Ano8tm5XsTQSmeLFEPFnMBoz1Q
+** A cortical band of gelatinous fibers causes the coiling of redvine tendrils: a model based upon cytochemical and immunocytochemical studies: https://link.springer.com/article/10.1007/s00425-006-0363-4
+** Physiological Studies on Pea Tendrils VIII. The Relationship of Circumnutation to Contact Coiling. — With a Description of a Laboratory Intervalometer Using Integrated Digital Circuits: http://onlinelibrary.wiley.com/doi/10.1111/j.1399-3054.1972.tb03548.x/full
+** Helical growth in plant organs: mechanisms and significance: http://dev.biologists.org/content/143/18/3272
+** mechanisms of tendrils motion in vines: https://books.google.com/books?hl=en&lr=&id=Z11Og4ipYHQC&oi=fnd&pg=PA1&dq=mechanisms+of+tendrils+motion+in+vines+&ots=kViKHSQrO4&sig=vkTXwX4RT19sZWcRrySpIazaLuc#v=onepage&q=mechanisms%20of%20tendrils%20motion%20in%20vines&f=false
