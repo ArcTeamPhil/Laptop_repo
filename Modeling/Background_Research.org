@@ -59,7 +59,7 @@ IR Thermometer (IRT)
 ***** avg temps + freq distrubution of temps over area
 ***** greater variance for plants in sunlight 25% - 42% and with larger pixels
 **** Illumination
-***** "The sensitivity of Tleaf to changes in stomatal conductance, and hence the utility of thermal imaging for the study of stomatal conductance, depends both on the absorbed radiation and on the boundary layer conductance and atmospheric humidity."
+***** "Tredshift -O 4000 -b 1.0he sensitivity of Tleaf to changes in stomatal conductance, and hence the utility of thermal imaging for the study of stomatal conductance, depends both on the absorbed radiation and on the boundary layer conductance and atmospheric humidity."
 ***** sunlit leaves better for stomatal conductance
 ***** reference objects experienced high variance from small size and changing level of wetness
 **** Energy Balance:
@@ -68,7 +68,9 @@ IR Thermometer (IRT)
 ***** boundary layer resistance to water vapour
 ***** net isothermal radiation
 ***** air water vapour pressure deficit
-***** parallel resistance to heat and radaiative transfer
+***** parallel resistance to heat and radaiativehed from escape sequence
+to mapping caps lock to both ctrl aAccordingly, electrical signals are probably the initial
+response of the plant to an exterior stimulund esc transfer
 ***** psychrometric constant
 ***** density of air
 ***** specific heat capascity of air
@@ -305,6 +307,13 @@ IR Thermometer (IRT)
 ** Biologially Inspired vine-Like and Tendril-Like Robots: http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7237221
 ** Tendril-Based Climbing Plants to Model, Simulate and Create Bio-Inspired Robotic Systems: http://www.sciencedirect.com/science/article/pii/S1672652914601177
 ** Microtubules, MAPS and plant directional cell expansion: https://www.researchgate.net/profile/John_Sedbrook/publication/5384840_Microtubules_MAPs_and_plant_directional_cell_expansion/links/565ef50d08ae4988a7bd9224.pdf
+*** Microtubules --> MT, Microtubule-associated proteins --> MAPs
+*** MTs influenced by many sources
+**** highly dynamic polymers of tubulin heterodimers.
+**** go through polymerization and depolimerization (dynamic instability)
+**** start from nucleation sites and able to create MTs at discrete angles to existing MTs
+**** controlled (unknown exactly) set of MAPs
+***** list in paper of MAPs and effect on dynamics
 ** Passonionfruit: https://www.hort.purdue.edu/newcrop/morton/passionfruit.html
 ** The global trend in plant twining direction: http://onlinelibrary.wiley.com/doi/10.1111/j.1466-8238.2007.00326.x/full
 ** Development at a Glance Phyllotaxis: http://dev.biologists.org/content/140/2/249.short
@@ -313,3 +322,59 @@ IR Thermometer (IRT)
 ** Physiological Studies on Pea Tendrils VIII. The Relationship of Circumnutation to Contact Coiling. — With a Description of a Laboratory Intervalometer Using Integrated Digital Circuits: http://onlinelibrary.wiley.com/doi/10.1111/j.1399-3054.1972.tb03548.x/full
 ** Helical growth in plant organs: mechanisms and significance: http://dev.biologists.org/content/143/18/3272
 ** mechanisms of tendrils motion in vines: https://books.google.com/books?hl=en&lr=&id=Z11Og4ipYHQC&oi=fnd&pg=PA1&dq=mechanisms+of+tendrils+motion+in+vines+&ots=kViKHSQrO4&sig=vkTXwX4RT19sZWcRrySpIazaLuc#v=onepage&q=mechanisms%20of%20tendrils%20motion%20in%20vines&f=false
+* Electrical signals
+** Research progress on electrical signals in higher plants: http://www.sciencedirect.com/science/article/pii/S1002007109000161
+*** "Electrical signals have been shown to be involved in many processes in plant life, including respiration [15], water uptake [16], leaf movement [17] and biotic stress response [18]."
+*** "However, the ionic mechanism of the electrical signals in higher plants has not been fully determined"
+*** "xperiments and analyses were conducted by means of the voltage clamp technique, the patch-clamp technique in combination with the ionic displacement method and by pharmacological approaches."
+*** " By considering the electrical excitation of plants, electrical signals in plants can be divided into three types: local electrical potential (LEP), action potential (AP) and variation potential (VP)."
+**** "LEP is a sub-threshold response induced by change in environmental factors (e.g. soil, water, fertility, light, air temperature and humidity). Although LEP is only locally generated"
+**** "AP is induced by non-damaging stimuli (e.g. cold, mechanical and electrical stimuli), and is a widespread signaling phenomenon which can rapidly transmit information over long distances. "
+**** " VP is induced by damaging stimuli (e.g. burning and cutting). Unlike AP, VP is characterized by a decrease in magnitude as it spreads away from the stimulated site [13]."
+**** "Accordingly, electrical signals are probably the initial response of the plant to an exterior stimulu"
+*** "Accordingly, electrical signals are probably the initial response of the plant to an exterior stimulus"
+**** "This type of response may trigger physiological variation (e.g. elongation growth, respiration, moisture absorption, substance unloading at the phloem, reduction of the turgor pressure"
+*** Extraceullular Measutement
+**** surface contact
+***** calomel electrode, which adopts a suitable ion solution (or nutrient solution) to connect a salt bridge between the electrode and the plant.
+****** not harmful
+****** short term
+**** electrodes and metal electrodes
+***** platinum and silver electrodes, which are normally inserted into the plants to measure the membrane potential
+***** slight damage
+***** long term
+*** Intraceullular
+**** Single cell monitorin
+*** patch-clamp technique w/ ionic displacement method
+**** monitor ion channels between cells (K+)
+*** Non-Invasive micoelactrode vibrating probe technique
+**** very sophisticated
+*** Light Signalling
+*** Guard cells, epidermal cells, and mesophyll cells reactiions to light are all different.
+**** "extracellular recording by surface contact electrode used to measure the membrane potential on a plant leaf can detect a mixture of the signals of the three types of cell"
+*** Cold-induced activity
+**** Ca2+ concentrations change with cooling rates
+*** Ionic Activity
+**** parrallel model of effects from K+, Ca2+, Cl-, H+
+*** "Combination of different electrophysiological techniques with modern signal processing methods may  lead  to  the  determination  of  the  physiological responses that are yet not fully understood, and to interesting new discoveries"
+** PLEASED: http://pleased-fp7.eu/?page_id=20
+** Electrical signals and their physiological significance in plants: https://backyardbrains.com/experiments/files/Fromm_2007_Plant_Cell_Environment.pdf
+*** Techniques for Measuring Electrical signals ins plants
+**** Extraceullular
+***** surface
+****** non-invasivem perform simultaneously with gas exchange recording
+****** Much like EEG
+***** inserted metal electrodes
+****** gather interior signals
+*** Generation of Electrical Signals
+**** Perception of Environment:
+***** "Environmental stimuli such as spontaneous changes in temperature,  light,  touch  or  wounding  can  induce  electrical signals at any site of the symplastic continuum"
+*** Types of Electrical Signals
+**** AP
+***** Rapidly propogated electrical messages
+** Novel Electric Signals In Plants Induced By Wounding Plant: https://www.sciencedaily.com/releases/2009/03/090309105030.htm
+** GLUTAMATE RECEPTOR-LIKE genes mediate leaf-to-leaf wound signalling: http://www.nature.com/nature/journal/v500/n7463/full/nature12478.html?WT.ec_id=NATURE-20130822#f2
+** Plant neurobiology: an integrated view of plant signaling: http://www.linv.org/images/papers_pdf/trends%20plant%20sci%202006%20brenner.pdf
+** ROS, Calcium, and Electric Signals: Key Mediators of Rapid Systemic Signaling in Plants: http://www.plantphysiol.org/content/171/3/1606.full
+** Characterization of the Variation Potential in Sunflower.: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC158572/
+** Studies on the plant electric wave signal by the wavelet analysis: http://iopscience.iop.org/article/10.1088/1742-6596/48/1/254
