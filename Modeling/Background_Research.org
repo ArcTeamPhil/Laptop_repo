@@ -372,9 +372,34 @@ response of the plant to an exterior stimulund esc transfer
 *** Types of Electrical Signals
 **** AP
 ***** Rapidly propogated electrical messages
+***** "The response is an all-or-none depolarization that spreads passively  from  the  excited  region  of  membrane  to  the neighbouring non-excited region"
+***** Ca2+, Cl-, K+ channels for respondoing to changes
+***** "When an AP reaches a pulvinus, it is transmitted laterally via plasmodesmata into the cells of the motor cortex. They respond  to  the  signal  by  ion  efflux  associated  with  water efflux, which leads to leaf movements"
+***** "Interestingly, the transmission of an AP induced by touch or cold shock stops at the base of the single pinna and no further transmission   occurs,  leaving   leaflets   from   neighbouring pinna unfolded."
+**** VP
+***** "This  signal varies   with   the   intensity   of   the   stimulus,   is   non-self- perpetuating and appears to be a local change to either a hydraulic  pressure  wave  or  chemicals  transmitted  in  the dead   xylem."
+***** "At saturating humidity, when xylem tension becomes negligible, VPs will not be generated."
+**** Means of signal Transmission
+***** The membrane potential of the sieve tubes has been shown to be dominated by K+ conductance"
+*** Physiological effects of Electrical Signals
 ** Novel Electric Signals In Plants Induced By Wounding Plant: https://www.sciencedaily.com/releases/2009/03/090309105030.htm
+*** "Although, in principle, cellular reactions in plants have also been demonstrated to follow the release of electrical signals induced by heat, chilling, or electric voltage, to what extent such signals carry specific information in nonspecialized plants or organs is disputed."
+*** AP and VP transmit long distance
+**** " Still, single APs, as “all-or-none” phenomena, likely do not contain much information regarding the kind of threat "
+**** "specific information regarding the nature of the threat may come from chemical signals"
+*** "new electrical signal type, called “system potential” (SP)"
+**** Occurs after Cut triggers AP and application of inorganic cations (Ca2+, GLu)
+**** "SPs do not obey all-or-none conditions and are not caused by a hydraulic pressure surge or activation of ion channels."
+*** Table of AP, VP, SP
+**** Rate, Propgation, Induction, Ion Movment, Signal
 ** GLUTAMATE RECEPTOR-LIKE genes mediate leaf-to-leaf wound signalling: http://www.nature.com/nature/journal/v500/n7463/full/nature12478.html?WT.ec_id=NATURE-20130822#f2
 ** Plant neurobiology: an integrated view of plant signaling: http://www.linv.org/images/papers_pdf/trends%20plant%20sci%202006%20brenner.pdf
 ** ROS, Calcium, and Electric Signals: Key Mediators of Rapid Systemic Signaling in Plants: http://www.plantphysiol.org/content/171/3/1606.full
 ** Characterization of the Variation Potential in Sunflower.: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC158572/
+*** Methods + Materials
+**** two types of electrodes measured extracellular  apoplastic  electrical  potential
+*** study (burn)
+**** "Simultaneous measurement of electrical potential and  length along a  sunflower stem  did,  indeed, reveal marked  and  rapid  stem  lengthening  preceding an electrical potential change, regardless of the direction of propagation of the signal"
+*** Disscussion
+**** "support the hypothesis that VP results from a hydraulic pressure surge transmitted rapidly in the xylem and sensed by living cells, triggering  change in the activity of mechanosensitive channels  or pumps and yielding an  altered  ion  flux across the  plasma  membrane, "
 ** Studies on the plant electric wave signal by the wavelet analysis: http://iopscience.iop.org/article/10.1088/1742-6596/48/1/254
