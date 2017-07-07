@@ -321,6 +321,16 @@ response of the plant to an exterior stimulund esc transfer
 ** A cortical band of gelatinous fibers causes the coiling of redvine tendrils: a model based upon cytochemical and immunocytochemical studies: https://link.springer.com/article/10.1007/s00425-006-0363-4
 ** Physiological Studies on Pea Tendrils VIII. The Relationship of Circumnutation to Contact Coiling. — With a Description of a Laboratory Intervalometer Using Integrated Digital Circuits: http://onlinelibrary.wiley.com/doi/10.1111/j.1399-3054.1972.tb03548.x/full
 ** Helical growth in plant organs: mechanisms and significance: http://dev.biologists.org/content/143/18/3272
+*** Growth
+**** Circumnutation disrupted by genes in determining direction
+**** Microtubules influence direction of movement
+**** circumnnuation left or right
+***** "The question then arises: why left or right? Mutant studies indicate that this depends on an as yet undefined inherent structural property of microtubule arrays"
+*** Motion
+**** "Tendrils carry a touch-sensitive region close to their tip, and if this contacts a suitable object the tendril rapidly twists around it, usually commencing within seconds or minutes"
+**** "Resupination may also occur in flower pedicels"
+**** "the mechanism presumably has an internal genetic component, as the handedness is fixed "
+** "Unlike animals, who have specific body areas for respiration, all parts of a plant respire, or breathe. Leaves, stems, flowers and even roots respire. One of the reasons that potted plants need repotting is to allow adequate air in the soil for root respiration."
 ** mechanisms of tendrils motion in vines: https://books.google.com/books?hl=en&lr=&id=Z11Og4ipYHQC&oi=fnd&pg=PA1&dq=mechanisms+of+tendrils+motion+in+vines+&ots=kViKHSQrO4&sig=vkTXwX4RT19sZWcRrySpIazaLuc#v=onepage&q=mechanisms%20of%20tendrils%20motion%20in%20vines&f=false
 * Electrical signals
 ** Research progress on electrical signals in higher plants: http://www.sciencedirect.com/science/article/pii/S1002007109000161
